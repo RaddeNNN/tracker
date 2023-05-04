@@ -1,5 +1,9 @@
 package com.example.secondapp3;
 
+import static androidx.core.content.PackageManagerCompat.LOG_TAG;
+
+import android.util.Log;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -19,16 +23,14 @@ import javax.sound.sampled.SourceDataLine;
 public class AudioFiles {
     public AudioFormat audioFormat;
     public InputStream audioFile;
+    public static String LOG_TAG = "myLogs";
     public static void main(String[] args) {
         String file = "C:\\Users\\Dmitriy\\Downloads\\Roland-GR-1-Clarinet-C5.wav";
         AudioFiles afiles = new AudioFiles();
         byte[] data1 = afiles.readAudioFileData(file);
         byte[] data2 = afiles.readWAVAudioFileData(file);
-        System.out.format("data len: %d\n", data1.length);
-        System.out.format("data len: %d\n", data2.length);
-        System.out.format("diff len: %d\n", data2.length - data1.length);
-        afiles.toWav(data1);
-        afiles.toWav(data2);
+        Log.d(LOG_TAG, "onLoadComplete, " + data2.length);
+        Log.d(LOG_TAG, "onLoadComplete, " + (data2.length-data1.length));
     }
 
     public byte[] readAudioFileData(final String filePath) {
@@ -77,7 +79,7 @@ public class AudioFiles {
             ByteArrayInputStream bais = new ByteArrayInputStream(totalByteArray);
             long length = (long)(totalByteArray.length / audioFormat.getFrameSize());
             AudioInputStream audioInputStreamTemp = new AudioInputStream(bais, audioFormat, length);
-            File fileOut = new File("transmitted.wav");
+            File fileOut = new File("C;\\transmitted.wav");
             AudioFileFormat.Type fileType = AudioSystem.getAudioFileFormat(audioFile).getType();
             if (AudioSystem.isFileTypeSupported(fileType,
                     audioInputStreamTemp)) {
