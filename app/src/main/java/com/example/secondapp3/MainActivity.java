@@ -310,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                 break;
         };
         text4tool.setText(texto);
-    }
+    }//
     private void mergePlaySounds(){
         mSoundPool.play(soundIdShot, 1, 1, 0, 0, 1);
         mSoundPool.play(soundIdExplosion, 1, 1, 0, 0, 1);
