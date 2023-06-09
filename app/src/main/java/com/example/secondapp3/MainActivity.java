@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -126,12 +128,48 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
             }
 
         });
+        EditText example=(EditText) findViewById(R.id.Sound1);
+        final String[] message = new String[1];
+        example.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[0] = example.getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                byte[] b = getData("kick");
-                LoadSound(b);
+                if(message[0].equals("1")) {
+                    byte[] b = getData("kick");
+                    LoadSound(b);
+                }
+                else if(message[0].equals("2")){
+                    byte[] b = getData("clap");
+                    LoadSound(b);
+                }
+                else if(message[0].equals("3")){
+                    byte[] b = getData("snare");
+                    LoadSound(b);
+                }
+                else if(message[0].equals("4")){
+                    byte[] b = getData("flute");
+                    LoadSound(b);
+                }
+                else if(message[0].equals("5")){
+                    byte[] b = getData("hat");
+                    LoadSound(b);
+                }
                 Toast.makeText(MainActivity.this,GetTextValue(NumericValues[0]),Toast.LENGTH_SHORT).show();
                 mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
                     @Override
@@ -172,14 +210,6 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                 break;
         }
     }
-    private void mergePlaySounds(){
-        mSoundPool.play(soundIdShot, 1, 1, 0, 0, 1);
-        mSoundPool.play(soundIdExplosion, 1, 1, 0, 0, 1);
-        mSoundPool.play(soundIdMetronom,1,1,0,-1,1);
-        mSoundPool.play(soundIdClaps,1,1,0,-1,1);
-        mSoundPool.play(soundIdKick,1,1,0,0,1);
-        mSoundPool.play(soundIdSnare,1,1,0,-1,1);
-    } //функция для параллельного воспроизведения нескольких звуков (сейчас это набор шаблонов)
     private void playSound(int SoundId, int effect){
         if(effect==0){
             mSoundPool.play(SoundId, 1, 1, 0, 0, 1);
@@ -200,23 +230,6 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
     public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
         Log.d(LOG_TAG, "onLoadComplete, sampleId = " + sampleId + ", status = " + status);
     } //функция которая показывает, что звук загружен в программу и готов к использованию
-    public void OnClick2(View v){
-        LoadSoundID=mSoundPool.load("/storage/emulated/0/Download/" + "test.bin",1);
-        //LoadSound(b);
-        Toast.makeText(MainActivity.this,String.valueOf(LoadSoundID), Toast.LENGTH_SHORT).show();
-        mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int sampleId,
-                                       int status) {
-                Log.i("OnLoadCompleteListener","Sound "+sampleId+" loaded.");
-                boolean loaded = true;
-                Toast.makeText(MainActivity.this, String.valueOf(loaded), Toast.LENGTH_SHORT).show();
-                mSoundPool.play(LoadSoundID,1,1,1,-1,1);
-            }
-        });
-
-
-    }
     public void LoadSound(byte[] b){
         File filetest;
         try{
