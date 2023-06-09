@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -45,21 +46,14 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
     final int MAX_STREAMS = 10; //максимальное колво одновременно воспроизвидимых звуков
     private Button X;
     private static final int  PICKFILE_RESULT_CODE=1;
-    private CheckBox effectApplier;
     private static final int beats = 8; //количество ударов - разнообразие партии
     private static final int instruments = 3; //количество инструментов для массива далее
-    private TextView text, text4tool; //выводит на экран "инстурмент"
+    private EditText[] NumericValues=new EditText[2];
     private ImageButton imageFirst, stopButton, imageButtonleft, imageButtonright;
     private MediaPlayer soundExp, soundKick, soundSnare, soundMetronom;//звуки
     private CountDownTimer timer, timerDelay;//высчитываеся удары в минуту и стучит на каждый тик
     private SeekBar bar; //выбрать удары в минуту
     private int counterBeat;//показывает как такт стучит машина
-    private int counterTool; //показывает какой инструмент выбран - всего 3 инструмента
-    private CheckBox[] checksForStep; //массив для галочек для всех тактов
-    private CheckBox firstcheck, secondcheck, thirdcheck, fourthcheck;//галочки для всех тактов
-    private CheckBox fifthcheck, sixthcheck, seventhcheck, eighthcheck;
-    private boolean[][] flagsForPlay; //массив флагов чтобы воспроизводить звуки
-    private int[] effects=new int[7];
     private SoundPool mSoundPool; //Обьект класса SoundPool для работы с парой и более звуков
     int soundIdHat, soundIdKick,soundIdClaps,soundIdMetronom,soundIdShot,soundIdExplosion,soundIdSnare; //ID для последующего обращения к звукам при загрузке в SoundPool
 
@@ -71,125 +65,13 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         mSoundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
         mSoundPool.setOnLoadCompleteListener(this); //SoundPool не будет воспроизводить звуки пока все они не будут готовы к воспроизведению ( сделано во избежание ошибок)
 
-        //////
-        soundIdShot = mSoundPool.load(this, R.raw.shot, 1);
-        Log.d(LOG_TAG, "soundIdShot = " + soundIdShot);
-        soundIdExplosion = mSoundPool.load(this,R.raw.explosion, 1);
-        Log.d(LOG_TAG, "soundIdExplosion = " + soundIdExplosion);
-        soundIdMetronom = mSoundPool.load(this,R.raw.metronom, 1);
-        Log.d(LOG_TAG, "soundIdMetronom = " + soundIdMetronom);
-        soundIdSnare = mSoundPool.load(this, R.raw.snare, 1);
-        Log.d(LOG_TAG, "soundIdSnare = " + soundIdSnare);
-        soundIdKick = mSoundPool.load(this,R.raw.kick, 1);
-        Log.d(LOG_TAG, "soundIdKick = " + soundIdKick);
-        soundIdClaps = mSoundPool.load(this,R.raw.clap, 1);
-        Log.d(LOG_TAG, "soundIdClaps = " + soundIdClaps);
-        soundIdHat = mSoundPool.load(this,R.raw.hat, 1);
-        Log.d(LOG_TAG, "soundIdHat = " + soundIdHat);
-        ////// добавление всех звуков из папки raw в обьект класса SoundPool для последующего воспроизведения
-
-        soundExp = MediaPlayer.create(this, R.raw.explosion);
-        soundKick = MediaPlayer.create(this, R.raw.kick);
-        soundSnare = MediaPlayer.create(this, R.raw.snare);
-        soundMetronom = MediaPlayer.create(this, R.raw.metronom);
+        NumericValues[0]=findViewById(R.id.Sound1);
 
 
         imageFirst = findViewById(R.id.imageFirst);
         stopButton = findViewById(R.id.stopButton);
         bar = findViewById(R.id.seekBar);
-        text = findViewById(R.id.textView);
-        text4tool = findViewById(R.id.text4tool);
         X=findViewById(R.id.button);
-        effectApplier=findViewById(R.id.checkBox9);
-        firstcheck = findViewById(R.id.checkBox);
-        secondcheck = findViewById(R.id.checkBox2);
-        thirdcheck = findViewById(R.id.checkBox3);
-        fourthcheck = findViewById(R.id.checkBox4);
-        fifthcheck = findViewById(R.id.checkBox5);
-        sixthcheck = findViewById(R.id.checkBox6);
-        seventhcheck = findViewById(R.id.checkBox7);
-        eighthcheck = findViewById(R.id.checkBox8);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for (int i=0; i<7; i++){
-                    effects[i]=0;
-                }
-            }
-        }, 0);
-        firstcheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkChanged(v,0);
-            }
-        });
-        secondcheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkChanged(v,1);
-            }
-        });
-        thirdcheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkChanged(v,2);
-            }
-        });
-        fourthcheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkChanged(v,3);
-            }
-        });
-        fifthcheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkChanged(v,4);
-            }
-        });
-        sixthcheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkChanged(v,5);
-            }
-        });
-        seventhcheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkChanged(v,6);
-            }
-        });
-        eighthcheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkChanged(v,7);
-            }
-        });
-        effectApplier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch(counterTool%instruments){
-                    case 0:
-                        effects[5]=1;
-                    case 1:
-                        effects[1]=1;
-                    case 2:
-                        effects[6]=1;
-                };
-            }
-        });
-
-        checksForStep = new CheckBox[]{firstcheck, secondcheck, thirdcheck, fourthcheck,
-                                        fifthcheck, sixthcheck, seventhcheck, eighthcheck};
-
-        imageButtonleft = findViewById(R.id.imageButtonleft);
-        imageButtonright = findViewById(R.id.imageButtonright);
-
-        flagsForPlay = new boolean[instruments][beats]; //кол-во строк - кол-во инструментов; кол-во столбцов - кол-во шагов
-        text4tool.setText(String.valueOf(counterTool%instruments));
-
-
-        counterBeat = 0;
         timer = new CountDownTimer(10000, 500) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -216,29 +98,6 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
             }
         });
 
-        imageButtonleft.setOnClickListener(new View.OnClickListener() {//перелестывание в списке инструментов влево
-            @Override
-            public void onClick(View v) {
-                if(counterTool > 0) counterTool--;
-                else counterTool = Integer.MAX_VALUE - 2;
-                changeChecked();
-
-                changeText();
-
-            }
-        });
-        imageButtonright.setOnClickListener(new View.OnClickListener() {//перелестывание в списке инструментов вправо
-            @Override
-            public void onClick(View v) {
-                if(counterTool < Integer.MAX_VALUE - 2) counterTool++;
-                else counterTool = 0;
-                changeChecked();
-
-                changeText();
-
-            }
-        });
-
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -254,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                         timer.start();
                     }
                 };
-                text.setText(String.valueOf(progress));
             }
 
             @Override
@@ -268,11 +126,13 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
             }
 
         });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                byte[] b =getData();
+                byte[] b = getData("kick");
                 LoadSound(b);
+                Toast.makeText(MainActivity.this,GetTextValue(NumericValues[0]),Toast.LENGTH_SHORT).show();
                 mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
                     @Override
                     public void onLoadComplete(SoundPool soundPool, int sampleId,
@@ -291,54 +151,14 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
 
 
     }
-    private void changeChecked(){ //срабатывает при перелистывании страницы
-        for(int i = 0; i < 8; i++) {
-            checksForStep[i].setChecked(flagsForPlay[counterTool % instruments][i]);
-        }
-//        firstcheck.setChecked(flagsForPlay[counterTool%instruments][0]);
-//        secondcheck.setChecked(flagsForPlay[counterTool%instruments][1]);
-//        thirdcheck.setChecked(flagsForPlay[counterTool%instruments][2]);
-//        fourthcheck.setChecked(flagsForPlay[counterTool%instruments][3]);
-//        fifthcheck.setChecked(flagsForPlay[counterTool%instruments][4]);
-//        sixthcheck.setChecked(flagsForPlay[counterTool%instruments][5]);
-//        seventhcheck.setChecked(flagsForPlay[counterTool%instruments][6]);
-//        eighthcheck.setChecked(flagsForPlay[counterTool%instruments][7]);
-    }
-    private void checkChanged(View v, int i){//срабатывает когда пользователь взаимодействует с чекбоксом
-        timer.cancel();
-        if(((CheckBox)v).isChecked()){
-            flagsForPlay[counterTool%3][i] = true;
-        }
-        else {
-            flagsForPlay[counterTool%3][i] = false;
-        }
-    }
     private void metronomSetter(){//задает метроном в зависимости от ударов в минуту и количества инстуремнтов (костыльно пока что)
-        if(flagsForPlay[0][counterBeat % beats]) playSound(soundIdExplosion, effects[5]);
-        if(flagsForPlay[1][counterBeat % beats]) playSound(soundIdKick, effects[1]);
-        if(flagsForPlay[2][counterBeat % beats]) playSound(soundIdSnare, effects[6]);
-        if(counterBeat < Integer.MAX_VALUE) counterBeat++;
-        else counterBeat = 0;
-        mSoundPool.play(soundIdMetronom,1,1,0,0,1);
+        //if(flagsForPlay[0][counterBeat % beats]) playSound(soundIdExplosion, effects[5]);
+        //if(flagsForPlay[1][counterBeat % beats]) playSound(soundIdKick, effects[1]);
+        //if(flagsForPlay[2][counterBeat % beats]) playSound(soundIdSnare, effects[6]);
+        //if(counterBeat < Integer.MAX_VALUE) counterBeat++;
+        //else counterBeat = 0;
+        //mSoundPool.play(soundIdMetronom,1,1,0,0,1);
     }
-    private void changeText(){
-        String texto;
-        switch(counterTool%instruments){
-            case 0:
-                texto = "взрыв";
-                break;
-            case 1:
-                texto = "кик";
-                break;
-            case 2:
-                texto = "барабан";
-                break;
-            default:
-                texto = "gg";
-                break;
-        };
-        text4tool.setText(texto);
-    }//
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -374,20 +194,6 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                 }
             };
             timerDelay.schedule(task, 20);
-        }
-    }
-    private void writeToFile(byte[] array)
-    {
-        File file = new File("C:\\Users\\Dmitriy\\Downloads\\test.wav");
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(array);
-            fos.close();
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
         }
     }
     @Override
@@ -451,10 +257,10 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
             e.printStackTrace();
         }
     }
-    public byte[] getData(){
-        File myDir = new File(getCacheDir(), "folder");
-        myDir.mkdir();
-        File file = new File(myDir.getAbsolutePath() + "/example.wav"); //плюсуется название файла
+    public byte[] getData(String input){
+        //File myDir = new File(getCacheDir(), "folder");
+        //myDir.mkdir();
+        File file = new File(getCacheDir() + "/" +input + ".wav"); //плюсуется название файла
         byte[] b = new byte[(int) file.length()];
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -470,5 +276,9 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
             Toast.makeText(MainActivity.this, "Cant read the file", Toast.LENGTH_SHORT).show();
         }
         return b;
+    }
+    public String GetTextValue(EditText input){
+        String name=input.getText().toString();
+        return name;
     }
 }
