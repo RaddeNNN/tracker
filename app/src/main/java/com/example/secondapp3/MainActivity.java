@@ -1,12 +1,15 @@
 package com.example.secondapp3;
 
 import static android.content.ContentValues.TAG;
+import static android.os.Environment.getExternalStoragePublicDirectory;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.media.SoundPool.OnLoadCompleteListener;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,10 +38,13 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
 public class MainActivity extends AppCompatActivity implements OnLoadCompleteListener {
-
+    int LoadSoundID;
+    boolean StartPlaying=false;
+    String FilePath, FileName;
     final String LOG_TAG = "myLogs"; // название лога для просмотра действий при дебаге
     final int MAX_STREAMS = 10; //максимальное колво одновременно воспроизвидимых звуков
     private Button X;
+    private static final int  PICKFILE_RESULT_CODE=1;
     private CheckBox effectApplier;
     private static final int beats = 8; //количество ударов - разнообразие партии
     private static final int instruments = 3; //количество инструментов для массива далее
@@ -60,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button button=findViewById(R.id.button);
         mSoundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
         mSoundPool.setOnLoadCompleteListener(this); //SoundPool не будет воспроизводить звуки пока все они не будут готовы к воспроизведению ( сделано во избежание ошибок)
 
@@ -260,6 +268,26 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
             }
 
         });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                byte[] b =getData();
+                LoadSound(b);
+                mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                    @Override
+                    public void onLoadComplete(SoundPool soundPool, int sampleId,
+                                               int status) {
+                        Log.i("OnLoadCompleteListener","Sound "+sampleId+" loaded.");
+                        boolean loaded = true;
+                        mSoundPool.play(LoadSoundID,1,1,1,-1,1);
+
+                    }
+                });
+
+
+            }
+        });
+
 
 
     }
@@ -311,6 +339,19 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         };
         text4tool.setText(texto);
     }//
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case PICKFILE_RESULT_CODE:
+                if (resultCode == RESULT_OK) {
+                    FilePath = data.getData().getPath();
+                    FileName = data.getData().getLastPathSegment();
+                    Toast.makeText(MainActivity.this,FilePath,Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
     private void mergePlaySounds(){
         mSoundPool.play(soundIdShot, 1, 1, 0, 0, 1);
         mSoundPool.play(soundIdExplosion, 1, 1, 0, 0, 1);
@@ -353,7 +394,81 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
     public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
         Log.d(LOG_TAG, "onLoadComplete, sampleId = " + sampleId + ", status = " + status);
     } //функция которая показывает, что звук загружен в программу и готов к использованию
-    public void OnClick(View v){
+    public void OnClick2(View v){
+        LoadSoundID=mSoundPool.load("/storage/emulated/0/Download/" + "test.bin",1);
+        //LoadSound(b);
+        Toast.makeText(MainActivity.this,String.valueOf(LoadSoundID), Toast.LENGTH_SHORT).show();
+        mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId,
+                                       int status) {
+                Log.i("OnLoadCompleteListener","Sound "+sampleId+" loaded.");
+                boolean loaded = true;
+                Toast.makeText(MainActivity.this, String.valueOf(loaded), Toast.LENGTH_SHORT).show();
+                mSoundPool.play(LoadSoundID,1,1,1,-1,1);
+            }
+        });
 
+
+    }
+    public void LoadSound(byte[] b){
+        File filetest;
+        try{
+            filetest=new File("/storage/emulated/0/Download/" + "output.bin");
+            if (filetest.exists()) {
+                filetest.delete();
+            }
+            try {
+                filetest.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            FileOutputStream out2 = new FileOutputStream(filetest);
+            try {
+                out2.write(b);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                out2.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                out2.flush();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                out2.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            LoadSoundID=mSoundPool.load(filetest.getPath(),1);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public byte[] getData(){
+        File myDir = new File(getCacheDir(), "folder");
+        myDir.mkdir();
+        File file = new File(myDir.getAbsolutePath() + "/example.wav"); //плюсуется название файла
+        byte[] b = new byte[(int) file.length()];
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            fileInputStream.read(b);
+        } catch (FileNotFoundException e) {
+            System.out.println("File Not Found.");
+            e.printStackTrace();
+            Toast.makeText(MainActivity.this, "FileNotFound", Toast.LENGTH_SHORT).show();
+        }
+        catch (IOException e1) {
+            System.out.println("Error Reading The File.");
+            e1.printStackTrace();
+            Toast.makeText(MainActivity.this, "Cant read the file", Toast.LENGTH_SHORT).show();
+        }
+        return b;
     }
 }
