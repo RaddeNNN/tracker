@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         mSoundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
         mSoundPool.setOnLoadCompleteListener(this); //SoundPool не будет воспроизводить звуки пока все они не будут готовы к воспроизведению ( сделано во избежание ошибок)
 
-        NumericValues[0]=findViewById(R.id.Sound1);
 
 
         imageFirst = findViewById(R.id.imageFirst);
@@ -128,13 +127,31 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
             }
 
         });
-        EditText example=(EditText) findViewById(R.id.Sound1);
-        final String[] message = new String[1];
-        example.addTextChangedListener(new TextWatcher() {
+        final EditText[][] examples=new EditText[2][6];
+        examples[0][0]=(EditText) findViewById(R.id.sound1_1);
+        examples[0][1]=(EditText) findViewById(R.id.sound1_2);
+        examples[0][2]=(EditText) findViewById(R.id.sound1_3);
+        examples[0][3]=(EditText) findViewById(R.id.sound1_4);
+        examples[0][4]=(EditText) findViewById(R.id.sound1_5);
+        examples[0][5]=(EditText) findViewById(R.id.sound1_6);
+        examples[1][0]=(EditText) findViewById(R.id.sound2_1);
+        examples[1][1]=(EditText) findViewById(R.id.sound2_2);
+        examples[1][2]=(EditText) findViewById(R.id.sound2_3);
+        examples[1][3]=(EditText) findViewById(R.id.sound2_4);
+        examples[1][4]=(EditText) findViewById(R.id.sound2_5);
+        examples[1][5]=(EditText) findViewById(R.id.sound2_6);
+        final String message[]=new String[12];
+        for(int i=0; i<11;i++){
+            message[i]="0";
+        }
 
+        //ниже создан регион с обработкой listenerov каждого из EditText
+
+        //region ListenersAdded
+        examples[0][0].addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                message[0] = example.getText().toString();
+                message[0] = examples[0][0].getText().toString();
             }
 
             @Override
@@ -147,30 +164,235 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                                       int before, int count) {
             }
         });
+        examples[0][1].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[1] = examples[0][1].getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+        examples[0][2].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[2] = examples[0][2].getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+        examples[0][3].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[3] = examples[0][3].getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+        examples[0][4].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[4] = examples[0][4].getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+        examples[0][5].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[5] = examples[0][5].getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+        examples[1][0].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[6] = examples[1][0].getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+        examples[1][1].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[7] = examples[1][1].getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+        examples[1][2].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[8] = examples[1][2].getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+        examples[1][3].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[9] = examples[1][3].getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+        examples[1][4].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[10] = examples[1][4].getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+        examples[1][5].addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                message[11] = examples[1][5].getText().toString();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+            }
+        });
+        //endregion
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(message[0].equals("1")) {
-                    byte[] b = getData("kick");
-                    LoadSound(b);
+                if(message[11]==null){
+
                 }
-                else if(message[0].equals("2")){
+                else if(message[11].equals("1")) {
+                        byte[] b = getData("kick");
+                        LoadSound(b);
+                    }
+                else if(message[11].equals("2")){
                     byte[] b = getData("clap");
                     LoadSound(b);
                 }
-                else if(message[0].equals("3")){
+                else if(message[11].equals("3")){
                     byte[] b = getData("snare");
                     LoadSound(b);
                 }
-                else if(message[0].equals("4")){
+                else if(message[11].equals("4")){
                     byte[] b = getData("flute");
                     LoadSound(b);
                 }
-                else if(message[0].equals("5")){
+                else if(message[11].equals("5")){
                     byte[] b = getData("hat");
                     LoadSound(b);
                 }
-                Toast.makeText(MainActivity.this,GetTextValue(NumericValues[0]),Toast.LENGTH_SHORT).show();
+//                for(int i=0; i<12;i++){
+//                    if(message[i].equals("1")) {
+//                        byte[] b = getData("kick");
+//                        LoadSound(b);
+//                    }
+//                    else if(message[i].equals("2")){
+//                        byte[] b = getData("clap");
+//                        LoadSound(b);
+//                    }
+//                    else if(message[i].equals("3")){
+//                        byte[] b = getData("snare");
+//                        LoadSound(b);
+//                    }
+//                    else if(message[i].equals("4")){
+//                        byte[] b = getData("flute");
+//                        LoadSound(b);
+//                    }
+//                    else if(message[i].equals("5")){
+//                        byte[] b = getData("hat");
+//                        LoadSound(b);
+//                    }
+//                    else{
+//
+//                    }
+//                }
                 mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
                     @Override
                     public void onLoadComplete(SoundPool soundPool, int sampleId,
@@ -289,9 +511,5 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
             Toast.makeText(MainActivity.this, "Cant read the file", Toast.LENGTH_SHORT).show();
         }
         return b;
-    }
-    public String GetTextValue(EditText input){
-        String name=input.getText().toString();
-        return name;
     }
 }
