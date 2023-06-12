@@ -63,15 +63,9 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = findViewById(R.id.button);
         mSoundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
         mSoundPool.setOnLoadCompleteListener(this); //SoundPool не будет воспроизводить звуки пока все они не будут готовы к воспроизведению ( сделано во избежание ошибок)
 
-
-        imageFirst = findViewById(R.id.imageFirst);
-        stopButton = findViewById(R.id.stopButton);
-        bar = findViewById(R.id.seekBar);
-        X = findViewById(R.id.button);
         timer = new CountDownTimer(10000, 500) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -83,63 +77,18 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                 timer.start();
             }
         };
-
-        imageFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                timer.cancel();
-                counterBeat = 0;
-                timer.start();
-            }
-        });
-        stopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                timer.cancel();
-            }
-        });
-
-        bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                timer.cancel();
-                long tick = Math.round(60000.0 / progress);
-                timer = new CountDownTimer(tick * 1000, tick) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        metronomSetter();
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        timer.start();
-                    }
-                };
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-
-        });
         final EditText[][] examples = new EditText[2][6];
         examples[0][0] = (EditText) findViewById(R.id.sound1_1);
         examples[0][1] = (EditText) findViewById(R.id.sound1_2);
-        examples[0][2] = (EditText) findViewById(R.id.sound1_3);
-        examples[0][3] = (EditText) findViewById(R.id.sound1_4);
-        examples[0][4] = (EditText) findViewById(R.id.sound1_5);
-        examples[0][5] = (EditText) findViewById(R.id.sound1_6);
-        examples[1][0] = (EditText) findViewById(R.id.sound2_1);
-        examples[1][1] = (EditText) findViewById(R.id.sound2_2);
+        examples[0][2] = (EditText) findViewById(R.id.sound1_2);
+        examples[0][3] = (EditText) findViewById(R.id.sound1_2);
+        examples[0][4] = (EditText) findViewById(R.id.sound1_2);
+        examples[0][5] = (EditText) findViewById(R.id.sound1_2);
+        examples[1][0] = (EditText) findViewById(R.id.sound1_2);
+        examples[1][1] = (EditText) findViewById(R.id.sound1_2);
         examples[1][2] = (EditText) findViewById(R.id.sound2_3);
         examples[1][3] = (EditText) findViewById(R.id.sound2_4);
-        examples[1][4] = (EditText) findViewById(R.id.sound2_5);
+        examples[1][4] = (EditText) findViewById(R.id.sound1_2);
         examples[1][5] = (EditText) findViewById(R.id.sound2_6);
         final String message[] = new String[12];
         for (int i = 0; i < 11; i++) {
@@ -360,9 +309,10 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                                       int before, int count) {
             }
         });
+        Button playButton=findViewById(R.id.playButton);
         //endregion
 
-        button.setOnClickListener(new View.OnClickListener() {
+        playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 byte[][] input = new byte[message.length / 6][];
