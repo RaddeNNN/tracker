@@ -8,101 +8,603 @@
     android:background="@drawable/background1">
 
     <EditText
-        android:id="@+id/sound2_8"
-        android:layout_width="49dp"
+        android:id="@+id/sound8_1"
+        android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="424dp"
-        android:ems="10"
+        android:layout_marginEnd="240dp"
+
+        android:layout_marginBottom="92dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
-        android:inputType="text"
-        android:textColor="#1DABC7"
         android:textSize="25dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.845"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/sound2_7"
-        android:layout_width="49dp"
+        android:id="@+id/sound8_4"
+        android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="484dp"
-        android:ems="10"
+        android:layout_marginEnd="24dp"
+
+        android:layout_marginBottom="92dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
-        android:inputType="text"
-        android:textColor="#1DABC7"
-        android:textSize="19dp"
+        android:textSize="25dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.845"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/sound2_6"
-        android:layout_width="49dp"
+        android:id="@+id/sound8_2"
+        android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="424dp"
-        android:ems="10"
+        android:layout_marginEnd="168dp"
+
+        android:layout_marginBottom="92dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
-        android:inputType="text"
-        android:textColor="#1DABC7"
-        android:textSize="19dp"
+        android:textSize="25dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.621"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound8_3"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="96dp"
+
+        android:layout_marginBottom="92dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound7_1"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="240dp"
+
+        android:layout_marginBottom="148dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound7_4"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="24dp"
+
+        android:layout_marginBottom="148dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound7_2"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="168dp"
+
+        android:layout_marginBottom="148dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound7_3"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="96dp"
+
+        android:layout_marginBottom="148dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound6_1"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="240dp"
+
+        android:layout_marginBottom="204dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound6_4"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="24dp"
+
+        android:layout_marginBottom="204dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound6_2"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="168dp"
+
+        android:layout_marginBottom="204dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound6_3"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="96dp"
+
+        android:layout_marginBottom="204dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound5_2"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="168dp"
+
+        android:layout_marginBottom="260dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound5_3"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="96dp"
+
+        android:layout_marginBottom="260dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound5_1"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="240dp"
+
+        android:layout_marginBottom="260dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound5_4"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="24dp"
+
+        android:layout_marginBottom="260dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound4_1"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="240dp"
+
+        android:layout_marginBottom="316dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound4_2"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="168dp"
+
+        android:layout_marginBottom="316dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound4_4"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="24dp"
+
+        android:layout_marginBottom="316dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound4_3"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="96dp"
+
+        android:layout_marginBottom="316dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound3_1"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="240dp"
+
+        android:layout_marginBottom="372dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound3_2"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="168dp"
+
+        android:layout_marginBottom="372dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound3_3"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="96dp"
+
+        android:layout_marginBottom="372dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound3_4"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="24dp"
+
+        android:layout_marginBottom="372dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound2_1"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="240dp"
+
+        android:layout_marginBottom="428dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/sound2_4"
-        android:layout_width="49dp"
+        android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="484dp"
-        android:ems="10"
+        android:layout_marginEnd="24dp"
+
+        android:layout_marginBottom="428dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
-        android:inputType="text"
-        android:textColor="#1DABC7"
-        android:textSize="19dp"
+        android:textSize="25dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.621"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/sound2_3"
-        android:layout_width="49dp"
+        android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="424dp"
-        android:ems="10"
+        android:layout_marginEnd="96dp"
+
+        android:layout_marginBottom="428dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
-        android:inputType="text"
-        android:textColor="#1DABC7"
-        android:textSize="19dp"
+        android:textSize="25dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/sound1_2"
-        android:layout_width="49dp"
+        android:layout_width="65dp"
         android:layout_height="41dp"
+        android:layout_marginEnd="168dp"
+
         android:layout_marginBottom="484dp"
-        android:ems="10"
+        android:layout_weight="1"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
-        android:inputType="text"
-        android:textColor="#1DABC7"
-        android:textSize="19dp"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound1_4"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="24dp"
+
+        android:layout_marginBottom="484dp"
+        android:layout_weight="1"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="330dp"
+        tools:layout_editor_absoluteY="202dp" />
+
+    <EditText
+        android:id="@+id/sound1_3"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="96dp"
+
+        android:layout_marginBottom="484dp"
+        android:layout_weight="1"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound2_2"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="168dp"
+
+        android:layout_marginBottom="428dp"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound1_1"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="240dp"
+        android:layout_weight="1"
+        android:text="00"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/disposabledroidbb"
+        android:textSize="25dp"
+
+        android:layout_marginBottom="484dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/number"
+        android:id="@+id/number9"
         android:layout_width="64dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="344dp"
-        android:layout_marginBottom="424dp"
+        android:layout_marginEnd="312dp"
+        android:layout_marginBottom="96dp"
+        android:fontFamily="@font/disposabledroidbb"
+        android:text="08"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:flow_horizontalAlign="center"
+        app:flow_verticalAlign="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/number8"
+        android:layout_width="64dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="312dp"
+        android:layout_marginBottom="152dp"
+        android:fontFamily="@font/disposabledroidbb"
+        android:text="07"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:flow_horizontalAlign="center"
+        app:flow_verticalAlign="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/number7"
+        android:layout_width="64dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="312dp"
+        android:layout_marginBottom="208dp"
+        android:fontFamily="@font/disposabledroidbb"
+        android:text="06"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:flow_horizontalAlign="center"
+        app:flow_verticalAlign="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/number6"
+        android:layout_width="64dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="312dp"
+        android:layout_marginBottom="264dp"
+        android:fontFamily="@font/disposabledroidbb"
+        android:text="05"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:flow_horizontalAlign="center"
+        app:flow_verticalAlign="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/number3"
+        android:layout_width="64dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="312dp"
+        android:layout_marginBottom="320dp"
+        android:fontFamily="@font/disposabledroidbb"
+        android:text="04"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:flow_horizontalAlign="center"
+        app:flow_verticalAlign="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/number2"
+        android:layout_width="64dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="312dp"
+        android:layout_marginBottom="432dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="02"
         android:textColor="@color/white"
@@ -112,42 +614,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <EditText
-        android:id="@+id/sound2_"
-        android:layout_width="49dp"
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="64dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="424dp"
-        android:ems="10"
+        android:layout_marginEnd="312dp"
+        android:layout_marginBottom="376dp"
         android:fontFamily="@font/disposabledroidbb"
-        android:inputType="text"
-        android:textColor="#1DABC7"
-        android:textSize="19dp"
+        android:text="03"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:flow_horizontalAlign="center"
+        app:flow_verticalAlign="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.209"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/sound1_1"
-        android:layout_width="49dp"
-        android:layout_height="41dp"
-        android:layout_marginBottom="476dp"
-        android:ems="10"
-        android:fontFamily="@font/disposabledroidbb"
-        android:inputType="text"
-        android:textColor="#1DABC7"
-        android:textSize="19dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.209"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/number1"
         android:layout_width="64dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="344dp"
-        android:layout_marginBottom="476dp"
+        android:layout_marginEnd="312dp"
+        android:layout_marginBottom="488dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="01"
         android:textColor="@color/white"
@@ -186,27 +673,37 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/BPM"
         android:layout_width="98dp"
         android:layout_height="44dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="164dp"
+        android:background="@drawable/back"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="172dp"
         android:ems="10"
+        android:fontFamily="@font/disposabledroidbb"
+        android:text="80"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="47dp"
+        android:layout_width="60dp"
         android:layout_height="23dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="196dp"
+        android:layout_marginEnd="192dp"
+        android:background="@color/white"
         android:fontFamily="@font/disposabledroidbb"
-        android:text=" BPM"
-        android:textColor="@color/white"
+        android:text="BPM"
+        android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="19dp"
+        app:layout_constraintBottom_toTopOf="@+id/BPM"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

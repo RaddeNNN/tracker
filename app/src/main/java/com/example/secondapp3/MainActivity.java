@@ -77,24 +77,39 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                 timer.start();
             }
         };
-        final EditText[][] examples = new EditText[2][6];
+        final EditText[][] examples = new EditText[8][4];
         examples[0][0] = (EditText) findViewById(R.id.sound1_1);
         examples[0][1] = (EditText) findViewById(R.id.sound1_2);
-        examples[0][2] = (EditText) findViewById(R.id.sound1_2);
-        examples[0][3] = (EditText) findViewById(R.id.sound1_2);
-        examples[0][4] = (EditText) findViewById(R.id.sound1_2);
-        examples[0][5] = (EditText) findViewById(R.id.sound1_2);
-        examples[1][0] = (EditText) findViewById(R.id.sound1_2);
-        examples[1][1] = (EditText) findViewById(R.id.sound1_2);
+        examples[0][2] = (EditText) findViewById(R.id.sound1_3);
+        examples[0][3] = (EditText) findViewById(R.id.sound1_4);
+        examples[1][0] = (EditText) findViewById(R.id.sound2_1);
+        examples[1][1] = (EditText) findViewById(R.id.sound2_2);
         examples[1][2] = (EditText) findViewById(R.id.sound2_3);
         examples[1][3] = (EditText) findViewById(R.id.sound2_4);
-        examples[1][4] = (EditText) findViewById(R.id.sound1_2);
-        examples[1][5] = (EditText) findViewById(R.id.sound2_6);
-        final String message[] = new String[12];
-        for (int i = 0; i < 11; i++) {
-            message[i] = "0";
-        }
-
+        examples[2][0] = (EditText) findViewById(R.id.sound3_1);
+        examples[2][1] = (EditText) findViewById(R.id.sound3_2);
+        examples[2][2] = (EditText) findViewById(R.id.sound3_3);
+        examples[2][3] = (EditText) findViewById(R.id.sound3_4);
+        examples[3][0] = (EditText) findViewById(R.id.sound3_1);
+        examples[3][1] = (EditText) findViewById(R.id.sound3_2);
+        examples[3][2] = (EditText) findViewById(R.id.sound3_3);
+        examples[3][3] = (EditText) findViewById(R.id.sound3_4);
+        examples[4][0] = (EditText) findViewById(R.id.sound4_1);
+        examples[4][1] = (EditText) findViewById(R.id.sound4_2);
+        examples[4][2] = (EditText) findViewById(R.id.sound4_3);
+        examples[4][3] = (EditText) findViewById(R.id.sound4_4);
+        examples[5][0] = (EditText) findViewById(R.id.sound5_1);
+        examples[5][1] = (EditText) findViewById(R.id.sound5_2);
+        examples[5][2] = (EditText) findViewById(R.id.sound5_3);
+        examples[5][3] = (EditText) findViewById(R.id.sound5_4);
+        examples[6][0] = (EditText) findViewById(R.id.sound6_1);
+        examples[6][1] = (EditText) findViewById(R.id.sound6_2);
+        examples[6][2] = (EditText) findViewById(R.id.sound6_3);
+        examples[6][3] = (EditText) findViewById(R.id.sound6_4);
+        examples[7][0] = (EditText) findViewById(R.id.sound7_1);
+        examples[7][1] = (EditText) findViewById(R.id.sound7_2);
+        examples[7][2] = (EditText) findViewById(R.id.sound7_3);
+        examples[7][3] = (EditText) findViewById(R.id.sound7_4);
         //ниже создан регион с обработкой listenerov каждого из EditText
 
 //        for(int i = 0 ; i < 11; i++){
@@ -116,221 +131,29 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
 //                }
 //            });
 
-        //region ListenersAdded
-        examples[0][0].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[0] = examples[0][0].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
-        examples[0][1].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[1] = examples[0][1].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
-        examples[0][2].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[2] = examples[0][2].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
-        examples[0][3].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[3] = examples[0][3].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
-        examples[0][4].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[4] = examples[0][4].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
-        examples[0][5].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[5] = examples[0][5].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
-        examples[1][0].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[6] = examples[1][0].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
-        examples[1][1].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[7] = examples[1][1].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
-        examples[1][2].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[8] = examples[1][2].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
-        examples[1][3].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[9] = examples[1][3].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
-        examples[1][4].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[10] = examples[1][4].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
-        examples[1][5].addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                message[11] = examples[1][5].getText().toString();
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-            }
-        });
+        EditText BPM=findViewById(R.id.BPM);
         Button playButton=findViewById(R.id.playButton);
-        //endregion
-
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                byte[][] input = new byte[message.length / 6][];
-                for (int i = 0; i < message.length; i += 6) {//старт индекс и прибавление зависит от номера едиттекста, куда запиываюстя номера семплов
-                    if (message[i].equals("1")) {
-                        input[i / 6] = getData("kick");
-                    } else if (message[i].equals("2")) {
-                        input[i / 6] = getData("clap");
-                    } else if (message[i].equals("3")) {
-                        input[i / 6] = getData("snare");
-                    } else if (message[i].equals("4")) {
-                        input[i / 6] = getData("flute");
-                    } else if (message[i].equals("5")) {
-                        input[i / 6] = getData("hat");
-                    } else{
-                            input[i / 6] = new byte[1];
-                    }
-                }
+                int bpm=Integer.parseInt(BPM.getText().toString());
+                if(bpm >50 && bpm<300) {
+                    byte[][] input = new byte[8][4];
+//                for (int i = 0; i < examples.length; i += 6) {//старт индекс и прибавление зависит от номера едиттекста, куда запиываюстя номера семплов
+//                    if (message[i].equals("1")) {
+//                        input[i / 6] = getData("kick");
+//                    } else if (message[i].equals("2")) {
+//                        input[i / 6] = getData("clap");
+//                    } else if (message[i].equals("3")) {
+//                        input[i / 6] = getData("snare");
+//                    } else if (message[i].equals("4")) {
+//                        input[i / 6] = getData("flute");
+//                    } else if (message[i].equals("5")) {
+//                        input[i / 6] = getData("hat");
+//                    } else{
+//                            input[i / 6] = new byte[1];
+//                    }
+//                }
 //                byte[][] input2 = new byte[8][];
 //                input2[0] = getData("kick");
 //                input2[1] = getData("clap");
@@ -340,20 +163,24 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
 //                input2[5] = getData("flute");
 //                input2[6] = getData("kick");
 //                input2[7] = getData("kick");
-                byte[] output = SaveSamples(input, 120);
-                if (output[0] != -1){
-                    LoadSound(output);
-                    mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-                        @Override
-                        public void onLoadComplete(SoundPool soundPool, int sampleId,
-                                                   int status) {
-                            Log.i("OnLoadCompleteListener", "Sound " + sampleId + " loaded.");
-                            boolean loaded = true;
-                            mSoundPool.play(LoadSoundID, 1, 1, 1, -1, 1);
+                    byte[] output = SaveSamples(input, 120);
+                    if (output[0] != -1) {
+                        LoadSound(output);
+                        mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                            @Override
+                            public void onLoadComplete(SoundPool soundPool, int sampleId,
+                                                       int status) {
+                                Log.i("OnLoadCompleteListener", "Sound " + sampleId + " loaded.");
+                                boolean loaded = true;
+                                mSoundPool.play(LoadSoundID, 1, 1, 1, -1, 1);
 
-                        }
-                    });
+                            }
+                        });
 
+                    }
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Invalid BPM", Toast.LENGTH_SHORT).show();
                 }
             }
         });
