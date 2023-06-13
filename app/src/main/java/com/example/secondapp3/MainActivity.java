@@ -1,376 +1,339 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package com.example.secondapp3;
 
-import static android.content.ContentValues.TAG;
-import static android.os.Environment.getExternalStoragePublicDirectory;
-
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Environment;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.media.SoundPool.OnLoadCompleteListener;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 
 public class MainActivity extends AppCompatActivity implements OnLoadCompleteListener {
     int LoadSoundID;
-    boolean StartPlaying = false;
-    String FilePath, FileName;
-    final String LOG_TAG = "myLogs"; // название лога для просмотра действий при дебаге
-    final int MAX_STREAMS = 10; //максимальное колво одновременно воспроизвидимых звуков
-    private Button X;
+    String FilePath;
+    String FileName;
+    final String LOG_TAG = "myLogs";
+    final int MAX_STREAMS = 10;
     private static final int PICKFILE_RESULT_CODE = 1;
-    private static final int beats = 8; //количество ударов - разнообразие партии
-    private static final int instruments = 3; //количество инструментов для массива далее
+    private static final int beats = 8;
+    private static final int instruments = 3;
     private EditText[] NumericValues = new EditText[2];
-    private ImageButton imageFirst, stopButton, imageButtonleft, imageButtonright;
-    private MediaPlayer soundExp, soundKick, soundSnare, soundMetronom;//звуки
-    private CountDownTimer timer, timerDelay;//высчитываеся удары в минуту и стучит на каждый тик
-    private SeekBar bar; //выбрать удары в минуту
-    private int counterBeat;//показывает как такт стучит машина
-    private SoundPool mSoundPool; //Обьект класса SoundPool для работы с парой и более звуков
-    int soundIdHat, soundIdKick, soundIdClaps, soundIdMetronom, soundIdShot, soundIdExplosion, soundIdSnare; //ID для последующего обращения к звукам при загрузке в SoundPool
+    private SoundPool mSoundPool;
 
-    @Override
+    public MainActivity() {
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mSoundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
-        mSoundPool.setOnLoadCompleteListener(this); //SoundPool не будет воспроизводить звуки пока все они не будут готовы к воспроизведению ( сделано во избежание ошибок)
-
-        timer = new CountDownTimer(10000, 500) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                metronomSetter();
-            }
-
-            @Override
-            public void onFinish() {
-                timer.start();
-            }
-        };
+        this.setContentView(R.layout.activity_main);
+        this.mSoundPool = new SoundPool(10, 3, 0);
+        this.mSoundPool.setOnLoadCompleteListener(this);
         final EditText[][] examples = new EditText[8][4];
-        examples[0][0] = (EditText) findViewById(R.id.sound1_1);
-        examples[0][1] = (EditText) findViewById(R.id.sound1_2);
-        examples[0][2] = (EditText) findViewById(R.id.sound1_3);
-        examples[0][3] = (EditText) findViewById(R.id.sound1_4);
-        examples[1][0] = (EditText) findViewById(R.id.sound2_1);
-        examples[1][1] = (EditText) findViewById(R.id.sound2_2);
-        examples[1][2] = (EditText) findViewById(R.id.sound2_3);
-        examples[1][3] = (EditText) findViewById(R.id.sound2_4);
-        examples[2][0] = (EditText) findViewById(R.id.sound3_1);
-        examples[2][1] = (EditText) findViewById(R.id.sound3_2);
-        examples[2][2] = (EditText) findViewById(R.id.sound3_3);
-        examples[2][3] = (EditText) findViewById(R.id.sound3_4);
-        examples[3][0] = (EditText) findViewById(R.id.sound3_1);
-        examples[3][1] = (EditText) findViewById(R.id.sound3_2);
-        examples[3][2] = (EditText) findViewById(R.id.sound3_3);
-        examples[3][3] = (EditText) findViewById(R.id.sound3_4);
-        examples[4][0] = (EditText) findViewById(R.id.sound4_1);
-        examples[4][1] = (EditText) findViewById(R.id.sound4_2);
-        examples[4][2] = (EditText) findViewById(R.id.sound4_3);
-        examples[4][3] = (EditText) findViewById(R.id.sound4_4);
-        examples[5][0] = (EditText) findViewById(R.id.sound5_1);
-        examples[5][1] = (EditText) findViewById(R.id.sound5_2);
-        examples[5][2] = (EditText) findViewById(R.id.sound5_3);
-        examples[5][3] = (EditText) findViewById(R.id.sound5_4);
-        examples[6][0] = (EditText) findViewById(R.id.sound6_1);
-        examples[6][1] = (EditText) findViewById(R.id.sound6_2);
-        examples[6][2] = (EditText) findViewById(R.id.sound6_3);
-        examples[6][3] = (EditText) findViewById(R.id.sound6_4);
-        examples[7][0] = (EditText) findViewById(R.id.sound7_1);
-        examples[7][1] = (EditText) findViewById(R.id.sound7_2);
-        examples[7][2] = (EditText) findViewById(R.id.sound7_3);
-        examples[7][3] = (EditText) findViewById(R.id.sound7_4);
-        //ниже создан регион с обработкой listenerov каждого из EditText
-
-//        for(int i = 0 ; i < 11; i++){
-//            int finalI = i;
-//            examples[i / 6][i % 6].addTextChangedListener(new TextWatcher() {
-//                @Override
-//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                    message[finalI] = examples[finalI / 6][finalI % 6].getText().toString();
-//                }
-//
-//                @Override
-//                public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//                }
-//
-//                @Override
-//                public void afterTextChanged(Editable s) {
-//
-//                }
-//            });
-
-        EditText BPM=findViewById(R.id.BPM);
-        Button playButton=findViewById(R.id.playButton);
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+        examples[0][0] = (EditText)this.findViewById(R.id.sound1_1);
+        examples[0][1] = (EditText)this.findViewById(R.id.sound1_2);
+        examples[0][2] = (EditText)this.findViewById(R.id.sound1_3);
+        examples[0][3] = (EditText)this.findViewById(R.id.sound1_4);
+        examples[1][0] = (EditText)this.findViewById(R.id.sound2_1);
+        examples[1][1] = (EditText)this.findViewById(R.id.sound2_2);
+        examples[1][2] = (EditText)this.findViewById(R.id.sound2_3);
+        examples[1][3] = (EditText)this.findViewById(R.id.sound2_4);
+        examples[2][0] = (EditText)this.findViewById(R.id.sound3_1);
+        examples[2][1] = (EditText)this.findViewById(R.id.sound3_2);
+        examples[2][2] = (EditText)this.findViewById(R.id.sound3_3);
+        examples[2][3] = (EditText)this.findViewById(R.id.sound3_4);
+        examples[3][0] = (EditText)this.findViewById(R.id.sound4_1);
+        examples[3][1] = (EditText)this.findViewById(R.id.sound4_2);
+        examples[3][2] = (EditText)this.findViewById(R.id.sound4_3);
+        examples[3][3] = (EditText)this.findViewById(R.id.sound4_4);
+        examples[4][0] = (EditText)this.findViewById(R.id.sound5_1);
+        examples[4][1] = (EditText)this.findViewById(R.id.sound5_2);
+        examples[4][2] = (EditText)this.findViewById(R.id.sound5_3);
+        examples[4][3] = (EditText)this.findViewById(R.id.sound5_4);
+        examples[5][0] = (EditText)this.findViewById(R.id.sound6_1);
+        examples[5][1] = (EditText)this.findViewById(R.id.sound6_2);
+        examples[5][2] = (EditText)this.findViewById(R.id.sound6_3);
+        examples[5][3] = (EditText)this.findViewById(R.id.sound6_4);
+        examples[6][0] = (EditText)this.findViewById(R.id.sound7_1);
+        examples[6][1] = (EditText)this.findViewById(R.id.sound7_2);
+        examples[6][2] = (EditText)this.findViewById(R.id.sound7_3);
+        examples[6][3] = (EditText)this.findViewById(R.id.sound7_4);
+        examples[7][0] = (EditText)this.findViewById(R.id.sound8_1);
+        examples[7][1] = (EditText)this.findViewById(R.id.sound8_2);
+        examples[7][2] = (EditText)this.findViewById(R.id.sound8_3);
+        examples[7][3] = (EditText)this.findViewById(R.id.sound8_4);
+        final EditText BPM = (EditText)this.findViewById(R.id.BPM);
+        Button playButton = (Button)this.findViewById(R.id.playButton);
+        Button stopButton = (Button)this.findViewById(R.id.button2);
+        stopButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                int bpm=Integer.parseInt(BPM.getText().toString());
-                if(bpm >50 && bpm<300) {
-                    byte[][] input = new byte[8][4];
-//                for (int i = 0; i < examples.length; i += 6) {//старт индекс и прибавление зависит от номера едиттекста, куда запиываюстя номера семплов
-//                    if (message[i].equals("1")) {
-//                        input[i / 6] = getData("kick");
-//                    } else if (message[i].equals("2")) {
-//                        input[i / 6] = getData("clap");
-//                    } else if (message[i].equals("3")) {
-//                        input[i / 6] = getData("snare");
-//                    } else if (message[i].equals("4")) {
-//                        input[i / 6] = getData("flute");
-//                    } else if (message[i].equals("5")) {
-//                        input[i / 6] = getData("hat");
-//                    } else{
-//                            input[i / 6] = new byte[1];
-//                    }
-//                }
-//                byte[][] input2 = new byte[8][];
-//                input2[0] = getData("kick");
-//                input2[1] = getData("clap");
-//                input2[2] = getData("flute");
-//                input2[3] = getData("hat");
-//                input2[4] = getData("clap");
-//                input2[5] = getData("flute");
-//                input2[6] = getData("kick");
-//                input2[7] = getData("kick");
-                    byte[] output = SaveSamples(input, 120);
-                    if (output[0] != -1) {
-                        LoadSound(output);
-                        mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-                            @Override
-                            public void onLoadComplete(SoundPool soundPool, int sampleId,
-                                                       int status) {
-                                Log.i("OnLoadCompleteListener", "Sound " + sampleId + " loaded.");
-                                boolean loaded = true;
-                                mSoundPool.play(LoadSoundID, 1, 1, 1, -1, 1);
-
-                            }
-                        });
-
-                    }
-                }
-                else{
-                    Toast.makeText(MainActivity.this, "Invalid BPM", Toast.LENGTH_SHORT).show();
-                }
+                MainActivity.this.mSoundPool.stop(MainActivity.this.LoadSoundID);
             }
         });
+        playButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View view) {
+                int bpm = Integer.parseInt(BPM.getText().toString());
+                if (bpm < 50 || bpm > 300) {
+                    Toast.makeText(MainActivity.this, "Invalid BPM. Now it's 120.", Toast.LENGTH_LONG).show();
+                    bpm = 120;
+                    BPM.setText("120");
+                }
 
+                byte[][] input = new byte[examples.length][];
 
+                for(int i = 0; i < examples.length; ++i) {
+                    if (examples[i][0].getText().toString().equals("1")) {
+                        input[i] = MainActivity.this.getData("kick");
+                    } else if (examples[i][0].getText().toString().equals("2")) {
+                        input[i] = MainActivity.this.getData("clap");
+                    } else if (examples[i][0].getText().toString().equals("3")) {
+                        input[i] = MainActivity.this.getData("snare");
+                    } else if (examples[i][0].getText().toString().equals("4")) {
+                        input[i] = MainActivity.this.getData("flute");
+                    } else if (examples[i][0].getText().toString().equals("5")) {
+                        input[i] = MainActivity.this.getData("hat");
+                    } else {
+                        input[i] = new byte[]{-1};
+                    }
+
+                    if (input[i][0] != -1) {
+                        if (!examples[i][1].getText().toString().equals("00") && !examples[i][1].getText().toString().equals("0") && !examples[i][3].getText().toString().equals("")) {
+                            MainActivity.Volume(input[i], (double)Integer.parseInt(examples[i][1].getText().toString()));
+                        }
+
+                        if (!examples[i][2].getText().toString().equals("00") && !examples[i][2].getText().toString().equals("0") && !examples[i][2].getText().toString().equals("")) {
+                            MainActivity.DownSampler(input[i], Integer.parseInt(examples[i][2].getText().toString()));
+                        }
+
+                        if (!examples[i][3].getText().toString().equals("00") && !examples[i][3].getText().toString().equals("0") && !examples[i][3].getText().toString().equals("")) {
+                            MainActivity.OverDrive(input[i], (double)Integer.parseInt(examples[i][3].getText().toString()));
+                        }
+                    }
+                }
+
+                byte[] output = MainActivity.SaveSamples(input, bpm);
+                if (output[0] != -1) {
+                    MainActivity.this.LoadSound(output);
+                    MainActivity.this.mSoundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
+                        public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                            Log.i("OnLoadCompleteListener", "Sound " + sampleId + " loaded.");
+                            boolean loaded = true;
+                            MainActivity.this.mSoundPool.play(MainActivity.this.LoadSoundID, 1.0F, 1.0F, 1, -1, 1.0F);
+                        }
+                    });
+                }
+
+            }
+        });
     }
 
-    private void metronomSetter() {//задает метроном в зависимости от ударов в минуту и количества инстуремнтов (костыльно пока что)
-        //if(flagsForPlay[0][counterBeat % beats]) playSound(soundIdExplosion, effects[5]);
-        //if(flagsForPlay[1][counterBeat % beats]) playSound(soundIdKick, effects[1]);
-        //if(flagsForPlay[2][counterBeat % beats]) playSound(soundIdSnare, effects[6]);
-        //if(counterBeat < Integer.MAX_VALUE) counterBeat++;
-        //else counterBeat = 0;
-        //mSoundPool.play(soundIdMetronom,1,1,0,0,1);
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case PICKFILE_RESULT_CODE:
-                if (resultCode == RESULT_OK) {
-                    FilePath = data.getData().getPath();
-                    FileName = data.getData().getLastPathSegment();
-                    Toast.makeText(MainActivity.this, FilePath, Toast.LENGTH_SHORT).show();
+        switch(requestCode) {
+            case 1:
+                if (resultCode == -1) {
+                    this.FilePath = data.getData().getPath();
+                    this.FileName = data.getData().getLastPathSegment();
+                    Toast.makeText(this, this.FilePath, Toast.LENGTH_LONG).show();
                 }
-                break;
+            default:
         }
     }
 
-    private void playSound(int SoundId, int effect) {
-        if (effect == 0) {
-            mSoundPool.play(SoundId, 1, 1, 0, 0, 1);
-        } else if (effect == 1) {
-            mSoundPool.play(SoundId, 1, 1, 0, 0, 1);
-            Timer timerDelay = new Timer();
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    mSoundPool.play(SoundId, 1, 1, 0, 0, 1);
-                }
-            };
-            timerDelay.schedule(task, 20);
-        }
-    }
-
-    @Override
     public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-        Log.d(LOG_TAG, "onLoadComplete, sampleId = " + sampleId + ", status = " + status);
-    } //функция которая показывает, что звук загружен в программу и готов к использованию
+        Log.d("myLogs", "onLoadComplete, sampleId = " + sampleId + ", status = " + status);
+    }
 
     public void LoadSound(byte[] b) {
-        File filetest;
         try {
-            filetest = new File("/storage/emulated/0/Download/" + "output.bin");
+            File filetest = new File("/storage/emulated/0/Download/output.bin");
             if (filetest.exists()) {
                 filetest.delete();
             }
+
             try {
                 filetest.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            FileOutputStream out2 = new FileOutputStream(filetest);
-            try {
-                out2.write(b);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                out2.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                out2.flush();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                out2.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (IOException var9) {
+                throw new RuntimeException(var9);
             }
 
-            LoadSoundID = mSoundPool.load(filetest.getPath(), 1);
-        } catch (Exception e) {
-            e.printStackTrace();
+            FileOutputStream out2 = new FileOutputStream(filetest);
+
+            try {
+                out2.write(b);
+            } catch (IOException var8) {
+                var8.printStackTrace();
+            }
+
+            try {
+                out2.close();
+            } catch (IOException var7) {
+                var7.printStackTrace();
+            }
+
+            try {
+                out2.flush();
+            } catch (IOException var6) {
+                throw new RuntimeException(var6);
+            }
+
+            try {
+                out2.close();
+            } catch (IOException var5) {
+                throw new RuntimeException(var5);
+            }
+
+            this.LoadSoundID = this.mSoundPool.load(filetest.getPath(), 1);
+        } catch (Exception var10) {
+            var10.printStackTrace();
         }
+
     }
 
     public byte[] getData(String input) {
-        //File myDir = new File(getCacheDir(), "folder");
-        //myDir.mkdir();
-        File file = new File(getCacheDir() + "/" + input + ".wav"); //плюсуется название файла
-        byte[] b = new byte[(int) file.length()];
+        File file = new File(this.getCacheDir() + "/" + input + ".wav");
+        byte[] b = new byte[(int)file.length()];
+
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             fileInputStream.read(b);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException var5) {
             System.out.println("File Not Found.");
-            e.printStackTrace();
-            Toast.makeText(MainActivity.this, "FileNotFound", Toast.LENGTH_SHORT).show();
-        } catch (IOException e1) {
+            var5.printStackTrace();
+            Toast.makeText(this, "FileNotFound", Toast.LENGTH_LONG).show();
+        } catch (IOException var6) {
             System.out.println("Error Reading The File.");
-            e1.printStackTrace();
-            Toast.makeText(MainActivity.this, "Cant read the file", Toast.LENGTH_SHORT).show();
+            var6.printStackTrace();
+            Toast.makeText(this, "Cant read the file", Toast.LENGTH_LONG).show();
         }
+
         return b;
     }
 
-    static byte[] OverDrive(byte[] sample, double k) {
-        int i, temp;
-        int centre;//насколько смещается центр, относительно которого преобразуется звук
-        for (i = 44; i < sample.length; i++) {
-            temp = (int) ((sample[i]) * k);//может быть больше или меньше крайних чисел в типе данных
+    static void Volume(byte[] sample, double k) {
+        k = (k + 1.0D) / 25.0D;
+
+        for(int i = 44; i < sample.length; ++i) {
+            int temp = sample[i] & 255;
+            temp = (int)((double)(temp - 128) * k);
             if (temp > 127) {
                 temp = 127;
             } else if (temp < -128) {
                 temp = -128;
             }
-            temp = (byte) ((temp) / k);//compressor
-            sample[i] = (byte) temp;
+
+            sample[i] = (byte)(temp + 128);
         }
-        return sample;
+
     }
 
-    static byte MixSamples(byte sample1, byte sample2)
-    {
-        float mixed;
+    static void OverDrive(byte[] sample, double k) {
+        k += 1;
+        int temp;
+
+        for(int i = 44; i < sample.length; ++i) {
+            temp = sample[i] & 255;
+            temp = (int)((double)(temp - 128) * k);
+            if (temp > 127) {
+                temp = 127;
+            } else if (temp < -128) {
+                temp = -128;
+            }
+
+            temp = (byte)((int)((double)(temp * 3) / k));
+            sample[i] = (byte)(temp + 128);
+        }
+
+    }
+
+    static void DownSampler(byte[] sample, int k) {
+        for(int i = 44; i < sample.length; ++i) {
+            if ((i - 44) % k != 0) {
+                sample[i] = -128;
+            }
+        }
+
+    }
+
+    static byte MixSamples(byte sample1, byte sample2) {
         byte output;
-        if(sample1 == 0)
-        {
+        if (sample1 == 0) {
             output = sample2;
-        }
-        else if(sample2 == 0)
-        {
+        } else if (sample2 == 0) {
             output = sample1;
-        }
-        else
-        {
-            mixed = (sample1) / 128.0f + (sample2) / 128.0f;
-            // reduce the volume a bit:
-            mixed *= 0.8f;
-            // hard clipping
-            if (mixed > 1.0f) mixed = 1.0f;
-            if (mixed < -1.0f) mixed = -1.0f;
-            output = (byte)(mixed * 128);
+        } else {
+            float mixed = (float)sample1 / 128.0F + (float)sample2 / 128.0F;
+            mixed *= 0.8F;
+            if (mixed > 1.0F) {
+                mixed = 1.0F;
+            }
+
+            if (mixed < -1.0F) {
+                mixed = -1.0F;
+            }
+
+            output = (byte)((int)(mixed * 128.0F));
         }
 
         return output;
     }
-    static byte[] SaveSamples(byte[][] samples, int bpm) {
-        int time4sample = 44100 * 30 / bpm;//кол-во байт на один шаг
-        byte[] output = new byte[44 + time4sample * samples.length];
-        int i, j;
 
+    static byte[] SaveSamples(byte[][] samples, int bpm) {
+        int time4sample = 44100 * 60 / bpm;
+        byte[] output = new byte[44 + time4sample * samples.length];
         output[0] = -1;
-        for (j = 0; j < samples.length; j++) {
-            if (samples[j][0] != 0) {
-                for (i = 0; i < 44; i++) {
+
+        int i;
+        label38:
+        for(int j = 0; j < samples.length; ++j) {
+            if (samples[j][0] != -1) {
+                i = 0;
+
+                while(true) {
+                    if (i >= 44) {
+                        break label38;
+                    }
+
                     output[i] = samples[j][i];
+                    ++i;
                 }
-                break;
             }
         }
+
         if (output[0] == -1) {
             return new byte[]{-1};
-        }
+        } else {
+            output[4] = (byte)((output.length - 44 + 36) % 256);
+            output[5] = (byte)((output.length - 44 + 36) / 256 % 256);
+            output[6] = (byte)((output.length - 44 + 36) / 65536 % 256);
+            output[7] = (byte)((output.length - 44 + 36) / 16777216 % 256);
+            output[40] = (byte)((output.length - 44) % 256);
+            output[41] = (byte)((output.length - 44) / 256 % 256);
+            output[42] = (byte)((output.length - 44) / 65536 % 256);
+            output[43] = (byte)((output.length - 44) / 16777216 % 256);
 
-        for (i = 44; i < output.length; i++) {
-            output[i] = (byte)0;
-        }
-        output[4] = (byte) ((output.length - 44 + 36) % 256);
-        output[5] = (byte) (((output.length - 44 + 36) / 256) % 256);
-        output[6] = (byte) (((output.length - 44 + 36) / (256 * 256)) % 256);
-        output[7] = (byte) (((output.length - 44 + 36) / (256 * 256 * 256)) % 256);
-        output[40] = (byte) ((output.length - 44) % 256);
-        output[41] = (byte) (((output.length - 44) / 256) % 256);
-        output[42] = (byte) (((output.length - 44) / (256 * 256)) % 256);
-        output[43] = (byte) (((output.length - 44) / (256 * 256 * 256)) % 256);
-        for (j = 0; j < samples.length; j++) {
-            for (i = 44; i < samples[j].length; i++) {
-                if (i + time4sample * j > output.length - 1 || i - 44 > time4sample || samples[j][0] == -1) {
-                    break;
+            for(i = 0; i < output.length - 44; ++i) {
+                if (i % time4sample + 44 >= samples[i / time4sample].length - 1) {
+                    output[i + 44] = -128;
+                } else {
+                    output[i + 44] = samples[i / time4sample][i % time4sample + 44];
                 }
-                output[i + time4sample * j] = MixSamples(output[i + time4sample * j], samples[j][i]);
-
             }
+
+            return output;
         }
-        return output;
     }
 }
