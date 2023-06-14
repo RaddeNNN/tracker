@@ -7,6 +7,21 @@
     tools:context=".MainActivity"
     android:background="@drawable/background1">
 
+    <Button
+        android:id="@+id/InfoButton"
+        android:layout_width="67dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="508dp"
+        android:fontFamily="@font/disposabledroidbb"
+        android:text="Info"
+        android:onClick="OnClick"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/textView67"
         android:layout_width="79dp"

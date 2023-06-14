@@ -6,6 +6,7 @@
 package com.example.secondapp3;
 
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
@@ -81,6 +82,15 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         stopButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 MainActivity.this.mSoundPool.stop(MainActivity.this.LoadSoundID);
+            }
+        });
+        Button InfoButton=findViewById(R.id.InfoButton);
+        InfoButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "1=kick, 2=clap",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "3=snare, 4=flute",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "5=hat",Toast.LENGTH_SHORT).show();
             }
         });
         playButton.setOnClickListener(new OnClickListener() {
