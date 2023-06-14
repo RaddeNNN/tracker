@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
     private static final int instruments = 3;
     private EditText[] NumericValues = new EditText[2];
     private SoundPool mSoundPool;
+    private boolean IsPlaying=false;
 
     public MainActivity() {
     }
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         Button stopButton = (Button)this.findViewById(R.id.button2);
         stopButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
+                IsPlaying=false;
                 MainActivity.this.mSoundPool.stop(MainActivity.this.LoadSoundID);
             }
         });
@@ -95,57 +97,60 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         });
         playButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                int bpm = Integer.parseInt(BPM.getText().toString());
-                if (bpm < 50 || bpm > 300) {
-                    Toast.makeText(MainActivity.this, "Invalid BPM. Now it's 120.", Toast.LENGTH_LONG).show();
-                    bpm = 120;
-                    BPM.setText("120");
-                }
-
-                byte[][] input = new byte[examples.length][];
-
-                for(int i = 0; i < examples.length; ++i) {
-                    if (examples[i][0].getText().toString().equals("1")) {
-                        input[i] = MainActivity.this.getData("kick");
-                    } else if (examples[i][0].getText().toString().equals("2")) {
-                        input[i] = MainActivity.this.getData("clap");
-                    } else if (examples[i][0].getText().toString().equals("3")) {
-                        input[i] = MainActivity.this.getData("snare");
-                    } else if (examples[i][0].getText().toString().equals("4")) {
-                        input[i] = MainActivity.this.getData("flute");
-                    } else if (examples[i][0].getText().toString().equals("5")) {
-                        input[i] = MainActivity.this.getData("hat");
-                    } else {
-                        input[i] = new byte[]{-1};
+                if (!IsPlaying) {
+                    IsPlaying = true;
+                    int bpm = Integer.parseInt(BPM.getText().toString());
+                    if (bpm < 50 || bpm > 300) {
+                        Toast.makeText(MainActivity.this, "Invalid BPM. Now it's 120.", Toast.LENGTH_LONG).show();
+                        bpm = 120;
+                        BPM.setText("120");
                     }
 
-                    if (input[i][0] != -1) {
-                        if (!examples[i][1].getText().toString().equals("00") && !examples[i][1].getText().toString().equals("0") && !examples[i][3].getText().toString().equals("")) {
-                            MainActivity.Volume(input[i], (double)Integer.parseInt(examples[i][1].getText().toString()));
+                    byte[][] input = new byte[examples.length][];
+
+                    for (int i = 0; i < examples.length; ++i) {
+                        if (examples[i][0].getText().toString().equals("1")) {
+                            input[i] = MainActivity.this.getData("kick");
+                        } else if (examples[i][0].getText().toString().equals("2")) {
+                            input[i] = MainActivity.this.getData("clap");
+                        } else if (examples[i][0].getText().toString().equals("3")) {
+                            input[i] = MainActivity.this.getData("snare");
+                        } else if (examples[i][0].getText().toString().equals("4")) {
+                            input[i] = MainActivity.this.getData("flute");
+                        } else if (examples[i][0].getText().toString().equals("5")) {
+                            input[i] = MainActivity.this.getData("hat");
+                        } else {
+                            input[i] = new byte[]{-1};
                         }
 
-                        if (!examples[i][2].getText().toString().equals("00") && !examples[i][2].getText().toString().equals("0") && !examples[i][2].getText().toString().equals("")) {
-                            MainActivity.DownSampler(input[i], Integer.parseInt(examples[i][2].getText().toString()));
-                        }
+                        if (input[i][0] != -1) {
+                            if (!examples[i][1].getText().toString().equals("00") && !examples[i][1].getText().toString().equals("0") && !examples[i][3].getText().toString().equals("")) {
+                                MainActivity.Volume(input[i], (double) Integer.parseInt(examples[i][1].getText().toString()));
+                            }
 
-                        if (!examples[i][3].getText().toString().equals("00") && !examples[i][3].getText().toString().equals("0") && !examples[i][3].getText().toString().equals("")) {
-                            MainActivity.OverDrive(input[i], (double)Integer.parseInt(examples[i][3].getText().toString()));
+                            if (!examples[i][2].getText().toString().equals("00") && !examples[i][2].getText().toString().equals("0") && !examples[i][2].getText().toString().equals("")) {
+                                MainActivity.DownSampler(input[i], Integer.parseInt(examples[i][2].getText().toString()));
+                            }
+
+                            if (!examples[i][3].getText().toString().equals("00") && !examples[i][3].getText().toString().equals("0") && !examples[i][3].getText().toString().equals("")) {
+                                MainActivity.OverDrive(input[i], (double) Integer.parseInt(examples[i][3].getText().toString()));
+                            }
                         }
                     }
-                }
 
-                byte[] output = MainActivity.SaveSamples(input, bpm);
-                if (output[0] != -1) {
-                    MainActivity.this.LoadSound(output);
-                    MainActivity.this.mSoundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
-                        public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                            Log.i("OnLoadCompleteListener", "Sound " + sampleId + " loaded.");
-                            boolean loaded = true;
-                            MainActivity.this.mSoundPool.play(MainActivity.this.LoadSoundID, 1.0F, 1.0F, 1, -1, 1.0F);
-                        }
-                    });
-                }
+                    byte[] output = MainActivity.SaveSamples(input, bpm);
+                    if (output[0] != -1) {
+                        MainActivity.this.LoadSound(output);
+                        MainActivity.this.mSoundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
+                            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                                Log.i("OnLoadCompleteListener", "Sound " + sampleId + " loaded.");
+                                boolean loaded = true;
+                                MainActivity.this.mSoundPool.play(MainActivity.this.LoadSoundID, 1.0F, 1.0F, 1, -1, 1.0F);
+                            }
+                        });
+                    }
 
+                }
             }
         });
     }
