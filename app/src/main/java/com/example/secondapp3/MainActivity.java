@@ -6,10 +6,11 @@
 package com.example.secondapp3;
 
 import android.content.Intent;
-import android.icu.text.IDNA;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,17 +27,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements OnLoadCompleteListener {
+    final int SAMPLESSCORE = 1;
+    final int NUMEFFECTS = 3;
+    int dynamicScore;
     int LoadSoundID;
     String FilePath;
     String FileName;
-    final String LOG_TAG = "myLogs";
-    final int MAX_STREAMS = 10;
-    private static final int PICKFILE_RESULT_CODE = 1;
-    private static final int beats = 8;
-    private static final int instruments = 3;
-    private EditText[] NumericValues = new EditText[2];
+    byte[][][] outputMusic;
     private SoundPool mSoundPool;
     private boolean IsPlaying = false;
+    EditText[][] examples = new EditText[8][4];
 
     public MainActivity() {
     }
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         this.setContentView(R.layout.activity_main);
         this.mSoundPool = new SoundPool(10, 3, 0);
         this.mSoundPool.setOnLoadCompleteListener(this);
-        final EditText[][] examples = new EditText[8][4];
+
         examples[0][0] = (EditText) this.findViewById(R.id.sound1_1);
         examples[0][1] = (EditText) this.findViewById(R.id.sound1_2);
         examples[0][2] = (EditText) this.findViewById(R.id.sound1_3);
@@ -79,9 +79,68 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         examples[7][1] = (EditText) this.findViewById(R.id.sound8_2);
         examples[7][2] = (EditText) this.findViewById(R.id.sound8_3);
         examples[7][3] = (EditText) this.findViewById(R.id.sound8_4);
+
+        int line, column;
+        outputMusic = new byte[SAMPLESSCORE][8][];
+        dynamicScore = 0;
+        //cycle for samples
+        for(line = 0; line < examples.length; line++){
+                int LINE = line;
+                examples[line][0].addTextChangedListener(new LightTextWatcher() {
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        //cleaning
+                        if(s.toString().length() == 1 && Integer.parseInt(s.toString()) > 5) examples[LINE][0].setText("5");
+                        else if(s.toString().length() == 2){
+                            if(s.toString().charAt(0) == '0'){
+                                if(Integer.parseInt(s.toString().substring(1,2)) > 5) examples[LINE][0].setText("05");
+                            }
+                            else if(Integer.parseInt(s.toString().substring(0,2)) > 5) examples[LINE][0].setText("5");
+                        }
+                        else if(s.toString().length() > 2) examples[LINE][0].setText(s.toString().substring(1,3));
+                    }
+                });
+        }
+        //cycle for effects
+        for(line = 0; line < examples.length; line++){
+            for(column = 1; column < examples[line].length; column++){
+                int COLUMN = column;
+                int LINE = line;
+                examples[line][column].addTextChangedListener(new LightTextWatcher() {
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        //cleaning
+                        if(s.toString().length() > 2) examples[LINE][COLUMN].setText(s.toString().substring(1,3));
+                    }
+                });
+            }
+        }
+
         final EditText BPM = (EditText) this.findViewById(R.id.BPM);
         Button playButton = (Button) this.findViewById(R.id.playButton);
         Button stopButton = (Button) this.findViewById(R.id.button2);
+        Button toLeft = (Button) this.findViewById(R.id.toLeft);
+        Button toRight = (Button) this.findViewById(R.id.toRight);
+        toLeft.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(dynamicScore < SAMPLESSCORE - 1) dynamicScore++;
+                //to do: loading to byte[][][] array
+                LoadToOutputMusic(outputMusic);
+                //to do: loading coefs arrangement upper in cycle
+                //to do: turning over the score
+            }
+        });
+        toRight.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(dynamicScore > 0) dynamicScore--;
+                //to do: loading to byte[][][] array
+                LoadToOutputMusic(outputMusic);
+                //to do: loading coefs arrangement upper in cycle
+                //to do: turning over the score
+            }
+        });
         stopButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 IsPlaying = false;
@@ -92,9 +151,9 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         InfoButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "1=kick, 2=clap", Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, "3=snare, 4=flute", Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, "5=hat", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "1 = kick, 2 = clap", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "3 = snare, 4 = flute", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "5 = hat", Toast.LENGTH_SHORT).show();
             }
         });
         playButton.setOnClickListener(new OnClickListener() {
@@ -103,76 +162,76 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                     IsPlaying = true;
                     int bpm = Integer.parseInt(BPM.getText().toString());
                     if (bpm < 50 || bpm > 300) {
-                        Toast.makeText(MainActivity.this, "Invalid BPM. Now it's 120.", Toast.LENGTH_LONG).show();
-                        bpm = 120;
-                        BPM.setText("120");
+                        Toast.makeText(MainActivity.this, "Invalid BPM. Now it's 80.", Toast.LENGTH_LONG).show();
+                        bpm = 80;
+                        BPM.setText("80");
                     }
+                    LoadToOutputMusic(outputMusic);
 
-                    byte[][] input = new byte[examples.length][];
-                    String num; int number;
-                    boolean isSet;
-                    for (int i = 0; i < examples.length; ++i) {
-                        isSet = false;
-                        if (examples[i][0].getText().toString().equals("1")) {
-                            input[i] = MainActivity.this.getData("kick");
-                            isSet = true;
-
-                        } else if (examples[i][0].getText().toString().equals("2")) {
-                            input[i] = MainActivity.this.getData("clap");
-                            isSet = true;
-                        } else if (examples[i][0].getText().toString().equals("3")) {
-                            input[i] = MainActivity.this.getData("snare");
-                            num = examples[i][1].getText().toString();
-                            isSet = true;
-                        } else if (examples[i][0].getText().toString().equals("4")) {
-                            input[i] = MainActivity.this.getData("flute");
-                            isSet = true;
-                        } else if (examples[i][0].getText().toString().equals("5")) {
-                            input[i] = MainActivity.this.getData("hat");
-                            isSet = true;
-                        } else {
-                            input[i] = new byte[]{-1};
-                            isSet = false;
-                        }
-                        if (isSet){
-                            num = examples[i][1].getText().toString();
-                            if (num.equals("00") || num.equals("0") || num.equals("")) {
-                                examples[i][1].setText("50");
-                                MainActivity.Volume(input[i], (double) 50);
-                            }
-                        }
-                        if (input[i][0] != -1) {
-                            num = examples[i][1].getText().toString();
-                            if (!num.equals("00") && !num.equals("0") && !num.equals("")) {
-                                number = Integer.parseInt(num);
-                                if(number > 99) {
-                                    number = 99;
-                                    examples[i][1].setText("99");
-                                }
-                                MainActivity.Volume(input[i], (double) Integer.parseInt(examples[i][1].getText().toString()));
-                            }
-                            num = examples[i][2].getText().toString();
-                            if (!num.equals("00") && !num.equals("0") && !num.equals("")) {
-                                number = Integer.parseInt(num);
-                                if(number > 99) {
-                                    number = 99;
-                                    examples[i][1].setText("99");
-                                }
-                                MainActivity.DownSampler(input[i], Integer.parseInt(examples[i][2].getText().toString()));
-                            }
-                            num = examples[i][3].getText().toString();
-                            if (!num.equals("00") && !num.equals("0") && !num.equals("")) {
-                                number = Integer.parseInt(num);
-                                if(number > 99) {
-                                    number = 99;
-                                    examples[i][1].setText("99");
-                                }
-                                MainActivity.OverDrive(input[i], (double) Integer.parseInt(examples[i][3].getText().toString()));
-                            }
-                        }
-                    }
-
-                    byte[] output = MainActivity.SaveSamples(input, bpm);
+//                    byte[][] input = new byte[examples.length][];
+//                    String num; int number;
+//                    boolean isSet;
+//                    for (int i = 0; i < examples.length; ++i) {
+//                        isSet = false;
+//                        if (examples[i][0].getText().toString().equals("1")) {
+//                            input[i] = MainActivity.this.getData("kick");
+//                            isSet = true;
+//
+//                        } else if (examples[i][0].getText().toString().equals("2")) {
+//                            input[i] = MainActivity.this.getData("clap");
+//                            isSet = true;
+//                        } else if (examples[i][0].getText().toString().equals("3")) {
+//                            input[i] = MainActivity.this.getData("snare");
+//                            num = examples[i][1].getText().toString();
+//                            isSet = true;
+//                        } else if (examples[i][0].getText().toString().equals("4")) {
+//                            input[i] = MainActivity.this.getData("flute");
+//                            isSet = true;
+//                        } else if (examples[i][0].getText().toString().equals("5")) {
+//                            input[i] = MainActivity.this.getData("hat");
+//                            isSet = true;
+//                        } else {
+//                            input[i] = new byte[]{-1};
+//                            isSet = false;
+//                        }
+//                        if (isSet){
+//                            num = examples[i][1].getText().toString();
+//                            if (num.equals("00") || num.equals("0") || num.equals("")) {
+//                                examples[i][1].setText("50");
+//                                WavFile.Volume(input[i], (double) 50);
+//                            }
+//                        }
+//                        if (input[i][0] != -1) {
+//                            num = examples[i][1].getText().toString();
+//                            if (!num.equals("00") && !num.equals("0") && !num.equals("")) {
+//                                number = Integer.parseInt(num);
+//                                if(number > 99) {
+//                                    number = 99;
+//                                    examples[i][1].setText("99");
+//                                }
+//                                WavFile.Volume(input[i], (double) Integer.parseInt(examples[i][1].getText().toString()));
+//                            }
+//                            num = examples[i][2].getText().toString();
+//                            if (!num.equals("00") && !num.equals("0") && !num.equals("")) {
+//                                number = Integer.parseInt(num);
+//                                if(number > 99) {
+//                                    number = 99;
+//                                    examples[i][1].setText("99");
+//                                }
+//                                WavFile.DownSampler(input[i], Integer.parseInt(examples[i][2].getText().toString()));
+//                            }
+//                            num = examples[i][3].getText().toString();
+//                            if (!num.equals("00") && !num.equals("0") && !num.equals("")) {
+//                                number = Integer.parseInt(num);
+//                                if(number > 99) {
+//                                    number = 99;
+//                                    examples[i][1].setText("99");
+//                                }
+//                                WavFile.OverDrive(input[i], (double) Integer.parseInt(examples[i][3].getText().toString()));
+//                            }
+//                        }
+//                    }
+                    byte[] output = WavFile.SaveSamples(outputMusic, bpm);
                     if (output[0] != -1) {
                         MainActivity.this.LoadSound(output);
                         MainActivity.this.mSoundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
@@ -209,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
 
     public void LoadSound(byte[] b) {
         try {
-            File filetest = new File("/storage/emulated/0/Download/output.bin");
+            File filetest = new File("/storage/emulated/0/Download/output.wav");
             if (filetest.exists()) {
                 filetest.delete();
             }
@@ -273,117 +332,55 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         return b;
     }
 
-    static void Volume(byte[] sample, double k) {
-        k = k / 50.0D;
-
-        for (int i = 44; i < sample.length; ++i) {
-            int temp = sample[i] & 255;
-            temp = (int) ((double) (temp - 128) * k);
-            if (temp > 127) {
-                temp = 127;
-            } else if (temp < -128) {
-                temp = -128;
-            }
-
-            sample[i] = (byte) (temp + 128);
-        }
-
-    }
-
-    static void OverDrive(byte[] sample, double k) {
-        k += 1;
-        int temp;
-
-        for (int i = 44; i < sample.length; ++i) {
-            temp = sample[i] & 255;
-            temp = (int) ((double) (temp - 128) * k);
-            if (temp > 127) {
-                temp = 127;
-            } else if (temp < -128) {
-                temp = -128;
-            }
-
-            temp = (byte) ((int) ((double) (temp * 3) / k));
-            sample[i] = (byte) (temp + 128);
-        }
-
-    }
-
-    static void DownSampler(byte[] sample, int k) {
-        for (int i = 44; i < sample.length; ++i) {
-            if ((i - 44) % k != 0) {
-                sample[i] = -128;
-            }
-        }
-
-    }
-
-    static byte MixSamples(byte sample1, byte sample2) {
-        byte output;
-        if (sample1 == 0) {
-            output = sample2;
-        } else if (sample2 == 0) {
-            output = sample1;
+    public byte[] getSample(Editable s) {
+        int k = GetCoef(s);
+        if (k == 1) {
+            return MainActivity.this.getData("kick");
+        } else if (k == 2) {
+            return MainActivity.this.getData("clap");
+        } else if (k == 3) {
+            return MainActivity.this.getData("snare");
+        } else if (k == 4) {
+            return MainActivity.this.getData("flute");
+        } else if (k == 5) {
+            return MainActivity.this.getData("hat");
         } else {
-            float mixed = (float) sample1 / 128.0F + (float) sample2 / 128.0F;
-            mixed *= 0.8F;
-            if (mixed > 1.0F) {
-                mixed = 1.0F;
-            }
-
-            if (mixed < -1.0F) {
-                mixed = -1.0F;
-            }
-
-            output = (byte) ((int) (mixed * 128.0F));
-        }
-
-        return output;
-    }
-
-    static byte[] SaveSamples(byte[][] samples, int bpm) {
-        int time4sample = 44100 * 30 / bpm;
-        byte[] output = new byte[44 + time4sample * samples.length];
-        output[0] = -1;
-
-        int i;
-        label38:
-        for (int j = 0; j < samples.length; ++j) {
-            if (samples[j][0] != -1) {
-                i = 0;
-
-                while (true) {
-                    if (i >= 44) {
-                        break label38;
-                    }
-
-                    output[i] = samples[j][i];
-                    ++i;
-                }
-            }
-        }
-
-        if (output[0] == -1) {
             return new byte[]{-1};
-        } else {
-            output[4] = (byte) ((output.length - 44 + 36) % 256);
-            output[5] = (byte) ((output.length - 44 + 36) / 256 % 256);
-            output[6] = (byte) ((output.length - 44 + 36) / 65536 % 256);
-            output[7] = (byte) ((output.length - 44 + 36) / 16777216 % 256);
-            output[40] = (byte) ((output.length - 44) % 256);
-            output[41] = (byte) ((output.length - 44) / 256 % 256);
-            output[42] = (byte) ((output.length - 44) / 65536 % 256);
-            output[43] = (byte) ((output.length - 44) / 16777216 % 256);
-
-            for (i = 0; i < output.length - 44; ++i) {
-                if (i % time4sample + 44 >= samples[i / time4sample].length - 1) {
-                    output[i + 44] = -128;
-                } else {
-                    output[i + 44] = samples[i / time4sample][i % time4sample + 44];
-                }
-            }
-
-            return output;
         }
     }
+
+    public int GetCoef(Editable s){
+        if(s.toString().length() == 0) return 0;
+        else if(s.toString().length() == 1) return Integer.parseInt(s.toString());
+        else if(s.toString().length() == 2) {
+            if(s.toString().charAt(0) == '0') return Integer.parseInt(s.toString().substring(1,2));
+            else return Integer.parseInt(s.toString());
+        }
+        else return -1;
+    }
+
+    public boolean CheckNum(String snum){
+        if (!snum.equals("00") && !snum.equals("0") && !snum.equals("")) return true;
+        else return false;
+    }
+
+    public void LoadToOutputMusic(byte[][][] outputM){
+        int line;
+        for(line = outputM[dynamicScore].length / 8 - 1; line < outputM[dynamicScore].length / 8 - 1 + 8; line++){
+            //applying data
+            outputM[dynamicScore][line] = getSample(examples[line][0].getText());
+            //applying effect
+            for(int effect = 0; effect < NUMEFFECTS; effect++) {
+                if (CheckNum(examples[line][effect + 1].getText().toString()))
+                    WavFile.ApplyEffect(
+                            outputM[dynamicScore][line],
+                            Integer.parseInt(examples[line][effect + 1].getText().toString()),
+                            Effect.getInstance(effect));
+            }
+        }
+    }
+}
+abstract class LightTextWatcher implements TextWatcher {
+    @Override public final void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+    @Override public final void onTextChanged(CharSequence s, int start, int before, int count) {}
 }

@@ -73,7 +73,7 @@
 
         android:inputType="number"
         android:layout_marginBottom="72dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -91,7 +91,7 @@
         android:inputType="number"
 
         android:layout_marginBottom="72dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -109,7 +109,7 @@
         android:inputType="number"
 
         android:layout_marginBottom="72dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -127,7 +127,7 @@
         android:inputType="number"
 
         android:layout_marginBottom="72dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -145,7 +145,7 @@
         android:layout_marginBottom="128dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -163,7 +163,7 @@
 
         android:inputType="number"
         android:layout_marginBottom="128dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -181,7 +181,7 @@
 
         android:inputType="number"
         android:layout_marginBottom="128dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -199,7 +199,7 @@
 
         android:inputType="number"
         android:layout_marginBottom="128dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -217,7 +217,7 @@
         android:layout_marginBottom="184dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -235,7 +235,7 @@
         android:layout_marginBottom="184dp"
         android:inputType="number"
 
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -253,7 +253,7 @@
 
         android:inputType="number"
         android:layout_marginBottom="184dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -271,7 +271,7 @@
         android:layout_marginBottom="184dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -289,7 +289,7 @@
         android:layout_marginBottom="240dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -307,7 +307,7 @@
         android:layout_marginBottom="240dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -325,7 +325,7 @@
         android:layout_marginBottom="240dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -343,7 +343,7 @@
         android:layout_marginBottom="240dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -361,7 +361,7 @@
         android:layout_marginBottom="296dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -379,7 +379,7 @@
         android:layout_marginBottom="296dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -397,7 +397,7 @@
         android:layout_marginBottom="296dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -415,7 +415,7 @@
         android:layout_marginBottom="296dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -433,7 +433,7 @@
         android:inputType="number"
 
         android:layout_marginBottom="352dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -451,7 +451,7 @@
         android:inputType="number"
 
         android:layout_marginBottom="352dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -469,7 +469,7 @@
         android:layout_marginBottom="352dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -487,7 +487,7 @@
         android:layout_marginBottom="352dp"
 
         android:inputType="number"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -505,7 +505,7 @@
         android:inputType="number"
 
         android:layout_marginBottom="408dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -524,7 +524,7 @@
         android:inputType="number"
 
         android:layout_marginBottom="408dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -542,7 +542,7 @@
         android:inputType="number"
 
         android:layout_marginBottom="408dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -561,7 +561,7 @@
 
         android:layout_marginBottom="464dp"
         android:layout_weight="1"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -578,7 +578,7 @@
         android:inputType="number"
         android:layout_marginBottom="464dp"
         android:layout_weight="1"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -599,7 +599,7 @@
 
         android:layout_marginBottom="464dp"
         android:layout_weight="1"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -617,7 +617,7 @@
         android:inputType="number"
 
         android:layout_marginBottom="408dp"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -634,7 +634,7 @@
         android:layout_height="41dp"
         android:layout_marginEnd="240dp"
         android:layout_weight="1"
-        android:text="00"
+        android:text="@string/empty_input"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/disposabledroidbb"
@@ -791,6 +791,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.897"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/toLeft"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="18dp"
+        android:fontFamily="@font/disposabledroidbb"
+        android:text="left"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/toRight"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginLeft="100dp"
+        android:fontFamily="@font/disposabledroidbb"
+        android:text="right"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText

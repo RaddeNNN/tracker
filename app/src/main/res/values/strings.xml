@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SecondApp3</string>
+    <string name="empty_input">00</string>
 </resources>
