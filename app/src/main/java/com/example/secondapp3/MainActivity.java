@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,18 +26,28 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+//to do:
+//better design for numScore (обозначение, какая дорожка сейчас на экране) - денис
+//add listeners for numLine (восемь обработчиков для строк, текст в которых будет меняться) - витя
+//add more lines for output music - витя
+//add export button to save the file (.wav / .mod) to download - денис
+//add save function to save the nums in edittexts to download - денис
 public class MainActivity extends AppCompatActivity implements OnLoadCompleteListener {
-    final int SAMPLESSCORE = 1;
+    final int SAMPLESSCORE = 2;
     final int NUMEFFECTS = 3;
     int dynamicScore;
+    int dynamicLines;//use for loading output stuff
     int LoadSoundID;
     String FilePath;
     String FileName;
     byte[][][] outputMusic;
+    int[][][] numsMusic;
     private SoundPool mSoundPool;
     private boolean IsPlaying = false;
     EditText[][] examples = new EditText[8][4];
+
+    //need to be made better
+    TextView numScore;
 
     public MainActivity() {
     }
@@ -46,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         this.setContentView(R.layout.activity_main);
         this.mSoundPool = new SoundPool(10, 3, 0);
         this.mSoundPool.setOnLoadCompleteListener(this);
+
+        numScore = findViewById(R.id.numScore);
 
         examples[0][0] = (EditText) this.findViewById(R.id.sound1_1);
         examples[0][1] = (EditText) this.findViewById(R.id.sound1_2);
@@ -82,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
 
         int line, column;
         outputMusic = new byte[SAMPLESSCORE][8][];
+        numsMusic = new int[SAMPLESSCORE][8][NUMEFFECTS + 1];
         dynamicScore = 0;
         //cycle for samples
         for(line = 0; line < examples.length; line++){
@@ -121,24 +135,27 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         Button stopButton = (Button) this.findViewById(R.id.button2);
         Button toLeft = (Button) this.findViewById(R.id.toLeft);
         Button toRight = (Button) this.findViewById(R.id.toRight);
+
+        numScore.setText(String.valueOf(dynamicScore + 1));
+
         toLeft.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(dynamicScore < SAMPLESSCORE - 1) dynamicScore++;
-                //to do: loading to byte[][][] array
-                LoadToOutputMusic(outputMusic);
-                //to do: loading coefs arrangement upper in cycle
-                //to do: turning over the score
+                LoadToOutput(outputMusic, numsMusic);
+                if(dynamicScore > 0) dynamicScore--;
+                numScore.setText(String.valueOf(dynamicScore + 1));
+                LoadFromNumsMusic(numsMusic);
+                //fix loading to output
             }
         });
         toRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(dynamicScore > 0) dynamicScore--;
-                //to do: loading to byte[][][] array
-                LoadToOutputMusic(outputMusic);
-                //to do: loading coefs arrangement upper in cycle
-                //to do: turning over the score
+                LoadToOutput(outputMusic, numsMusic);
+                if(dynamicScore < SAMPLESSCORE - 1) dynamicScore++;
+                numScore.setText(String.valueOf(dynamicScore + 1));
+                LoadFromNumsMusic(numsMusic);
+                //fix loading to output
             }
         });
         stopButton.setOnClickListener(new OnClickListener() {
@@ -158,92 +175,32 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         });
         playButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                if (!IsPlaying) {
-                    IsPlaying = true;
-                    int bpm = Integer.parseInt(BPM.getText().toString());
-                    if (bpm < 50 || bpm > 300) {
-                        Toast.makeText(MainActivity.this, "Invalid BPM. Now it's 80.", Toast.LENGTH_LONG).show();
-                        bpm = 80;
-                        BPM.setText("80");
-                    }
-                    LoadToOutputMusic(outputMusic);
-
-//                    byte[][] input = new byte[examples.length][];
-//                    String num; int number;
-//                    boolean isSet;
-//                    for (int i = 0; i < examples.length; ++i) {
-//                        isSet = false;
-//                        if (examples[i][0].getText().toString().equals("1")) {
-//                            input[i] = MainActivity.this.getData("kick");
-//                            isSet = true;
-//
-//                        } else if (examples[i][0].getText().toString().equals("2")) {
-//                            input[i] = MainActivity.this.getData("clap");
-//                            isSet = true;
-//                        } else if (examples[i][0].getText().toString().equals("3")) {
-//                            input[i] = MainActivity.this.getData("snare");
-//                            num = examples[i][1].getText().toString();
-//                            isSet = true;
-//                        } else if (examples[i][0].getText().toString().equals("4")) {
-//                            input[i] = MainActivity.this.getData("flute");
-//                            isSet = true;
-//                        } else if (examples[i][0].getText().toString().equals("5")) {
-//                            input[i] = MainActivity.this.getData("hat");
-//                            isSet = true;
-//                        } else {
-//                            input[i] = new byte[]{-1};
-//                            isSet = false;
-//                        }
-//                        if (isSet){
-//                            num = examples[i][1].getText().toString();
-//                            if (num.equals("00") || num.equals("0") || num.equals("")) {
-//                                examples[i][1].setText("50");
-//                                WavFile.Volume(input[i], (double) 50);
-//                            }
-//                        }
-//                        if (input[i][0] != -1) {
-//                            num = examples[i][1].getText().toString();
-//                            if (!num.equals("00") && !num.equals("0") && !num.equals("")) {
-//                                number = Integer.parseInt(num);
-//                                if(number > 99) {
-//                                    number = 99;
-//                                    examples[i][1].setText("99");
-//                                }
-//                                WavFile.Volume(input[i], (double) Integer.parseInt(examples[i][1].getText().toString()));
-//                            }
-//                            num = examples[i][2].getText().toString();
-//                            if (!num.equals("00") && !num.equals("0") && !num.equals("")) {
-//                                number = Integer.parseInt(num);
-//                                if(number > 99) {
-//                                    number = 99;
-//                                    examples[i][1].setText("99");
-//                                }
-//                                WavFile.DownSampler(input[i], Integer.parseInt(examples[i][2].getText().toString()));
-//                            }
-//                            num = examples[i][3].getText().toString();
-//                            if (!num.equals("00") && !num.equals("0") && !num.equals("")) {
-//                                number = Integer.parseInt(num);
-//                                if(number > 99) {
-//                                    number = 99;
-//                                    examples[i][1].setText("99");
-//                                }
-//                                WavFile.OverDrive(input[i], (double) Integer.parseInt(examples[i][3].getText().toString()));
-//                            }
-//                        }
-//                    }
-                    byte[] output = WavFile.SaveSamples(outputMusic, bpm);
-                    if (output[0] != -1) {
-                        MainActivity.this.LoadSound(output);
-                        MainActivity.this.mSoundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
-                            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                                Log.i("OnLoadCompleteListener", "Sound " + sampleId + " loaded.");
-                                boolean loaded = true;
-                                MainActivity.this.mSoundPool.play(MainActivity.this.LoadSoundID, 1.0F, 1.0F, 1, -1, 1.0F);
-                            }
-                        });
-                    }
-
+                if (IsPlaying) {
+                    IsPlaying = false;
+                    MainActivity.this.mSoundPool.stop(MainActivity.this.LoadSoundID);
                 }
+                IsPlaying = true;
+                int bpm = Integer.parseInt(BPM.getText().toString());
+                if (bpm < 50 || bpm > 300) {
+                    Toast.makeText(MainActivity.this, "Invalid BPM. Now it's 120.", Toast.LENGTH_LONG).show();
+                    bpm = 120;
+                    BPM.setText("120");
+                }
+                LoadToOutput(outputMusic, numsMusic);
+                LoadFromNumsMusic(numsMusic);
+
+                byte[] output = WavFile.SaveSamples(outputMusic, bpm);
+                if (output[0] != -1) {
+                    MainActivity.this.LoadSound(output);
+                    MainActivity.this.mSoundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
+                        public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                            Log.i("OnLoadCompleteListener", "Sound " + sampleId + " loaded.");
+                            boolean loaded = true;
+                            MainActivity.this.mSoundPool.play(MainActivity.this.LoadSoundID, 1.0F, 1.0F, 1, -1, 1.0F);
+                        }
+                    });
+                }
+
             }
         });
     }
@@ -376,6 +333,29 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                             outputM[dynamicScore][line],
                             Integer.parseInt(examples[line][effect + 1].getText().toString()),
                             Effect.getInstance(effect));
+            }
+        }
+    }
+    public void LoadToNumsMusic(int[][][] numsM){
+        int line, index;
+        for(line = 0; line < numsM[0].length; line++){//dynamicLines here
+            for(index = 0; index < NUMEFFECTS + 1; index++){
+                numsM[dynamicScore][line][index] = GetCoef(examples[line][index].getText());
+            }
+        }
+    }
+    public void LoadToOutput(byte[][][] outputM, int[][][] numsM){
+        LoadToOutputMusic(outputM);
+        LoadToNumsMusic(numsM);
+    }
+    public void LoadFromNumsMusic(int[][][] numsM){
+        int line, index;
+        String num;
+        for(line = 0; line < numsM[0].length; line++){//dynamicLines here
+            for(index = 0; index < NUMEFFECTS + 1; index++){
+                num = String.valueOf(numsM[dynamicScore][line][index]);
+                if(num.length() < 2) num = "0" + num;
+                examples[line][index].setText(num);
             }
         }
     }

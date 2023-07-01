@@ -1,7 +1,9 @@
 package com.example.secondapp3;
 
 public class WavFile {
-
+//to do: change coefs in effects
+    //delay
+    //better saving function - the sounds shoudnt be cut
     private static void Volume(byte[] sample, double k) {
         k = k / 50.0D;
 
@@ -62,40 +64,68 @@ public class WavFile {
 
     static byte MixSamples(byte sample1, byte sample2) {
         byte output;
-        if (sample1 == 0) {
-            output = sample2;
-        } else if (sample2 == 0) {
-            output = sample1;
-        } else {
-            float mixed = (float) sample1 / 128.0F + (float) sample2 / 128.0F;
-            mixed *= 0.8F;
-            if (mixed > 1.0F) {
-                mixed = 1.0F;
-            }
+        int intSample1, intSample2;
+        intSample1 = (sample1 & 0xFF) - 128;
+        intSample2 = (sample2 & 0xFF) - 128;
+        float mixed = ((float)intSample1 + (float)intSample2) / 128.0F;
 
-            if (mixed < -1.0F) {
-                mixed = -1.0F;
-            }
-
-            output = (byte) ((int) (mixed * 128.0F));
+        mixed *= 0.6F;
+        if (mixed > 1.0F)
+        {
+            mixed = 1.0F;
         }
+        else if (mixed < -1.0F)
+        {
+            mixed = -1.0F;
+        }
+        output = (byte)((((int)(mixed * 128.0F)) & 0xFF) + 128);
 
         return output;
     }
 
-    static byte[] SaveSamples(byte[][][] sampless, int bpm) {//to do: saving the whole music - not only one score
-        int i;
-        byte[][] samples = new byte[sampless[0].length][];
-        for(int j = 0; j < sampless[0].length; j++){
-                samples[j] = sampless[0][j];
+    static byte[] MixSamples(byte[][]samples) {
+        byte[] output = new byte[]{-1};
+        int startScore = 0;
+        for(int sample = 0; sample < samples.length; sample++){
+            if(samples[sample][0] != -1){
+                output = samples[sample].clone();
+                startScore = sample;
+                break;
+            }
         }
+        if (output[0] == -1) {
+            return new byte[]{-1};
+        }
+        else{
+            int i, score;
+            for(i = 44; i < output.length; i++){
+                for(score = startScore + 1; score < samples.length; score++){
+                    if (samples[score] != null && samples[score][0] != -1) {
+                        output[i] = MixSamples(output[i], samples[score][i]);
+                    }
+                }
+            }
+            return output;
+        }
+    }
+
+    static byte[] SaveSamples(byte[][][] samples, int bpm) {
+        byte[][] tempOutput = new byte[samples.length][];
+        for(int score = 0; score < samples.length; score++){
+            tempOutput[score] = SaveSamples(samples[score], bpm);
+        }
+        return MixSamples(tempOutput);
+    }
+
+    static byte[] SaveSamples(byte[][] samples, int bpm) {
+        int i;
         int time4sample = 44100 * 30 / bpm;
         byte[] output = new byte[44 + time4sample * samples.length];
         output[0] = -1;
 
 
         for(int j = 0; j < samples.length; ++j) {
-            if (samples[j][0] != -1) {
+            if (samples[j] != null && samples[j][0] != -1) {
                 for(i = 0; i < 44; i++){
                     output[i] = samples[j][i];
                 }
