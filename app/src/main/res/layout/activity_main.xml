@@ -7,26 +7,185 @@
     tools:context=".MainActivity"
     android:background="@drawable/background1">
 
+    <EditText
+        android:id="@+id/sound1_5"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="20dp"
+
+        android:layout_marginBottom="464dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/disposabledroidbb"
+        android:inputType="number"
+        android:text="@string/empty_input"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound5_5"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="20dp"
+
+        android:layout_marginBottom="240dp"
+
+        android:fontFamily="@font/disposabledroidbb"
+        android:inputType="number"
+        android:text="@string/empty_input"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound6_5"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="20dp"
+
+        android:layout_marginBottom="184dp"
+        android:fontFamily="@font/disposabledroidbb"
+
+        android:inputType="number"
+        android:text="@string/empty_input"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound2_5"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="20dp"
+
+
+        android:layout_marginBottom="408dp"
+
+        android:fontFamily="@font/disposabledroidbb"
+        android:inputType="number"
+        android:text="@string/empty_input"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound4_5"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="20dp"
+
+        android:layout_marginBottom="296dp"
+
+        android:fontFamily="@font/disposabledroidbb"
+        android:inputType="number"
+        android:text="@string/empty_input"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound8_5"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="20dp"
+
+        android:layout_marginBottom="72dp"
+
+        android:fontFamily="@font/disposabledroidbb"
+        android:inputType="number"
+        android:text="@string/empty_input"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound7_5"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="20dp"
+
+
+        android:layout_marginBottom="128dp"
+        android:fontFamily="@font/disposabledroidbb"
+        android:inputType="number"
+        android:text="@string/empty_input"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sound3_5"
+        android:layout_width="65dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="20dp"
+
+        android:layout_marginBottom="352dp"
+
+        android:fontFamily="@font/disposabledroidbb"
+        android:inputType="number"
+        android:text="@string/empty_input"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="79dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="507dp"
+        android:fontFamily="@font/disposabledroidbb"
+        android:text="DL"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
         android:id="@+id/InfoButton"
         android:layout_width="67dp"
         android:layout_height="47dp"
         android:layout_marginBottom="508dp"
         android:fontFamily="@font/disposabledroidbb"
-        android:text="Info"
         android:onClick="OnClick"
+        android:text="Info"
         android:textColor="@color/black"
         app:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView67"
         android:layout_width="79dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="70dp"
         android:layout_marginBottom="507dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="OD"
@@ -40,7 +199,7 @@
         android:id="@+id/textView66"
         android:layout_width="79dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="88dp"
+        android:layout_marginEnd="125dp"
         android:layout_marginBottom="507dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="DC"
@@ -54,7 +213,7 @@
         android:id="@+id/textView63"
         android:layout_width="79dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="164dp"
+        android:layout_marginEnd="190dp"
         android:layout_marginBottom="507dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="VOL"
@@ -68,7 +227,7 @@
         android:id="@+id/sound8_1"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="240dp"
+        android:layout_marginEnd="267dp"
 
 
         android:inputType="number"
@@ -86,7 +245,7 @@
         android:id="@+id/sound8_4"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="75dp"
 
         android:inputType="number"
 
@@ -104,7 +263,7 @@
         android:id="@+id/sound8_2"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="168dp"
+        android:layout_marginEnd="195dp"
 
         android:inputType="number"
 
@@ -122,7 +281,7 @@
         android:id="@+id/sound8_3"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="130dp"
 
         android:inputType="number"
 
@@ -140,7 +299,7 @@
         android:id="@+id/sound7_1"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="240dp"
+        android:layout_marginEnd="267dp"
 
         android:layout_marginBottom="128dp"
 
@@ -158,7 +317,7 @@
         android:id="@+id/sound7_4"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="75dp"
 
 
         android:inputType="number"
@@ -176,7 +335,7 @@
         android:id="@+id/sound7_2"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="168dp"
+        android:layout_marginEnd="195dp"
 
 
         android:inputType="number"
@@ -194,7 +353,7 @@
         android:id="@+id/sound7_3"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="130dp"
 
 
         android:inputType="number"
@@ -212,7 +371,7 @@
         android:id="@+id/sound6_1"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="240dp"
+        android:layout_marginEnd="267dp"
 
         android:layout_marginBottom="184dp"
 
@@ -230,7 +389,7 @@
         android:id="@+id/sound6_4"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="75dp"
 
         android:layout_marginBottom="184dp"
         android:inputType="number"
@@ -248,7 +407,7 @@
         android:id="@+id/sound6_2"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="168dp"
+        android:layout_marginEnd="195dp"
 
 
         android:inputType="number"
@@ -283,7 +442,7 @@
         android:id="@+id/sound6_3"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="130dp"
 
         android:layout_marginBottom="184dp"
 
@@ -301,7 +460,7 @@
         android:id="@+id/sound5_2"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="168dp"
+        android:layout_marginEnd="195dp"
 
         android:layout_marginBottom="240dp"
 
@@ -319,7 +478,7 @@
         android:id="@+id/sound5_3"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="130dp"
 
         android:layout_marginBottom="240dp"
 
@@ -337,7 +496,7 @@
         android:id="@+id/sound5_1"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="240dp"
+        android:layout_marginEnd="267dp"
 
         android:layout_marginBottom="240dp"
 
@@ -355,7 +514,7 @@
         android:id="@+id/sound5_4"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="75dp"
 
         android:layout_marginBottom="240dp"
 
@@ -373,7 +532,7 @@
         android:id="@+id/sound4_1"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="240dp"
+        android:layout_marginEnd="267dp"
 
         android:layout_marginBottom="296dp"
 
@@ -391,7 +550,7 @@
         android:id="@+id/sound4_2"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="168dp"
+        android:layout_marginEnd="195dp"
 
         android:layout_marginBottom="296dp"
 
@@ -409,7 +568,7 @@
         android:id="@+id/sound4_4"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="75dp"
 
         android:layout_marginBottom="296dp"
 
@@ -427,7 +586,7 @@
         android:id="@+id/sound4_3"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="130dp"
 
         android:layout_marginBottom="296dp"
 
@@ -445,7 +604,7 @@
         android:id="@+id/sound3_1"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="240dp"
+        android:layout_marginEnd="267dp"
 
         android:inputType="number"
 
@@ -463,7 +622,7 @@
         android:id="@+id/sound3_2"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="168dp"
+        android:layout_marginEnd="195dp"
 
         android:inputType="number"
 
@@ -481,7 +640,7 @@
         android:id="@+id/sound3_3"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="130dp"
 
         android:layout_marginBottom="352dp"
 
@@ -499,7 +658,7 @@
         android:id="@+id/sound3_4"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="75dp"
 
         android:layout_marginBottom="352dp"
 
@@ -517,7 +676,7 @@
         android:id="@+id/sound2_1"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="240dp"
+        android:layout_marginEnd="267dp"
 
         android:inputType="number"
 
@@ -535,7 +694,7 @@
         android:id="@+id/sound2_4"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="75dp"
 
 
         android:inputType="number"
@@ -554,7 +713,7 @@
         android:id="@+id/sound2_3"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="130dp"
 
         android:inputType="number"
 
@@ -572,7 +731,7 @@
         android:id="@+id/sound1_2"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="168dp"
+        android:layout_marginEnd="195dp"
 
         android:inputType="number"
 
@@ -590,7 +749,7 @@
         android:id="@+id/sound1_4"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="75dp"
 
         android:inputType="number"
         android:layout_marginBottom="464dp"
@@ -610,7 +769,7 @@
         android:id="@+id/sound1_3"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="130dp"
 
         android:inputType="number"
 
@@ -629,7 +788,7 @@
         android:id="@+id/sound2_2"
         android:layout_width="65dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="168dp"
+        android:layout_marginEnd="195dp"
 
         android:inputType="number"
 
@@ -649,7 +808,7 @@
 
         android:inputType="number"
         android:layout_height="41dp"
-        android:layout_marginEnd="240dp"
+        android:layout_marginEnd="267dp"
         android:layout_weight="1"
         android:text="@string/empty_input"
         android:textAlignment="center"
@@ -666,7 +825,7 @@
         android:id="@+id/number9"
         android:layout_width="64dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="312dp"
+        android:layout_marginEnd="332dp"
         android:layout_marginBottom="76dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="08"
@@ -681,7 +840,7 @@
         android:id="@+id/number8"
         android:layout_width="64dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="312dp"
+        android:layout_marginEnd="332dp"
         android:layout_marginBottom="132dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="07"
@@ -696,7 +855,7 @@
         android:id="@+id/number7"
         android:layout_width="64dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="312dp"
+        android:layout_marginEnd="332dp"
         android:layout_marginBottom="188dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="06"
@@ -711,7 +870,7 @@
         android:id="@+id/number6"
         android:layout_width="64dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="312dp"
+        android:layout_marginEnd="332dp"
         android:layout_marginBottom="244dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="05"
@@ -726,7 +885,7 @@
         android:id="@+id/number3"
         android:layout_width="64dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="312dp"
+        android:layout_marginEnd="332dp"
         android:layout_marginBottom="300dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="04"
@@ -741,7 +900,7 @@
         android:id="@+id/number2"
         android:layout_width="64dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="312dp"
+        android:layout_marginEnd="332dp"
         android:layout_marginBottom="412dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="02"
@@ -756,7 +915,7 @@
         android:id="@+id/number"
         android:layout_width="64dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="312dp"
+        android:layout_marginEnd="332dp"
         android:layout_marginBottom="356dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="03"
@@ -771,7 +930,7 @@
         android:id="@+id/number1"
         android:layout_width="64dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="312dp"
+        android:layout_marginEnd="332dp"
         android:layout_marginBottom="468dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="01"
@@ -874,7 +1033,7 @@
         android:id="@+id/textView62"
         android:layout_width="56dp"
         android:layout_height="51dp"
-        android:layout_marginEnd="248dp"
+        android:layout_marginEnd="272dp"
         android:layout_marginBottom="504dp"
         android:fontFamily="@font/disposabledroidbb"
         android:text="SP"
