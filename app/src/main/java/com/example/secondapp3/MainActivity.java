@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
     private SoundPool mSoundPool;
     private boolean IsPlaying = false;
     EditText[][] examples = new EditText[8][5];
+    EditText BPM;
 
     public MainActivity() {
     }
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
             }
         }
 
-        final EditText BPM = (EditText) this.findViewById(R.id.BPM);
+        BPM = (EditText) this.findViewById(R.id.BPM);
         Button playButton = (Button) this.findViewById(R.id.playButton);
         Button stopButton = (Button) this.findViewById(R.id.button2);
         Button toLeft = (Button) this.findViewById(R.id.toLeft);
@@ -391,6 +392,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                 Data[i][j].setText("00");
             }
         }
+        BPM.setText("120");
     }
     public void SaveData(EditText[][] Data) throws FileNotFoundException {
         byte[] bytes=new byte[40];
@@ -401,6 +403,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                 storage+=" ";
             }
         }
+        storage+=BPM.getText().toString();
         bytes=storage.getBytes(StandardCharsets.UTF_8);
         File fileout = new File("/storage/emulated/0/Download/saved.txt");
         if (fileout.exists()) {
@@ -454,12 +457,14 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
 
         String content = stringBuilder.toString();
         String[] array = null;
+        int j,i;
         array = content.split(" ");
-        for(int i=0;i<examples.length;i++){
-            for (int j=0;j<examples[i].length;j++){
+        for(i=0;i<examples.length;i++){
+            for (j=0;j<examples[i].length;j++){
                 examples[i][j].setText(array[i*5+j]);
             }
         }
+        BPM.setText(array[examples.length*5]);
     }
 
     public void LoadToOutputMusic(byte[][][] outputM){
