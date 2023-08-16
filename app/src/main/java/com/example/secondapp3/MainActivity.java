@@ -156,11 +156,6 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         });
         stopButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                try {
-                    LoadData();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
                 IsPlaying = false;
                 MainActivity.this.mSoundPool.stop(MainActivity.this.LoadSoundID);
             }
@@ -174,13 +169,32 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                 Toast.makeText(MainActivity.this, "5 = hat", Toast.LENGTH_SHORT).show();
             }
         });
-        playButton.setOnClickListener(new OnClickListener() {
+        Button LoadButton=findViewById(R.id.LoadButton);
+        Button SaveButton=findViewById(R.id.SaveButton);
+        LoadButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    LoadData();
+                    Toast.makeText(MainActivity.this,"Data loaded successfully", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        SaveButton.setOnClickListener(new OnClickListener() {
+            @Override
             public void onClick(View view) {
                 try {
                     SaveData(examples);
+                    Toast.makeText(MainActivity.this,"Saved successfully", Toast.LENGTH_SHORT).show();
                 } catch (FileNotFoundException e) {
-                    Toast.makeText(MainActivity.this, "Invalid BPM. Now it's 80.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Error. Try Again", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+        playButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View view) {
                 if (!IsPlaying) {
                     IsPlaying = true;
                     int bpm = Integer.parseInt(BPM.getText().toString());
