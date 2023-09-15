@@ -32,7 +32,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends AppCompatActivity implements OnLoadCompleteListener {
-    final int SAMPLESSCORE = 1;
+    final int SAMPLESSCORE = 2;
     final int NUMEFFECTS = 3;
     int dynamicScore;
     int dynamicLines;//use for loading output stuff
@@ -148,22 +148,20 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
             @Override
             public void onClick(View v) {
                 LoadToOutput(outputMusic, numsMusic);
-                if(dynamicScore < SAMPLESSCORE - 1) dynamicScore++;
-                //to do: loading to byte[][][] array
-                LoadToOutputMusic(outputMusic);
-                //to do: loading coefs arrangement upper in cycle
-                //to do: turning over the score
+                if(dynamicScore > 0) dynamicScore--;
+                numScore.setText(String.valueOf(dynamicScore + 1));
+                LoadFromNumsMusic(numsMusic);
+                //fix loading to output
             }
         });
         toRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoadToOutput(outputMusic, numsMusic);
-                if(dynamicScore > 0) dynamicScore--;
-                //to do: loading to byte[][][] array
-                LoadToOutputMusic(outputMusic);
-                //to do: loading coefs arrangement upper in cycle
-                //to do: turning over the score
+                if(dynamicScore < SAMPLESSCORE - 1) dynamicScore++;
+                numScore.setText(String.valueOf(dynamicScore + 1));
+                LoadFromNumsMusic(numsMusic);
+                //fix loading to output
             }
         });
         stopButton.setOnClickListener(new OnClickListener() {
@@ -207,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
         });
         playButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                if (!IsPlaying) {
+                if (IsPlaying) {
                     IsPlaying = false;
                     MainActivity.this.mSoundPool.stop(MainActivity.this.LoadSoundID);
                 }
@@ -218,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
                     bpm = 80;
                     BPM.setText("80");
                 }
-                LoadToOutputMusic(outputMusic);
+                LoadToOutput(outputMusic, numsMusic);
                 LoadFromNumsMusic(numsMusic);
                     byte[] output = WavFile.SaveSamples(outputMusic, bpm);
                     if (output[0] != -1) {
