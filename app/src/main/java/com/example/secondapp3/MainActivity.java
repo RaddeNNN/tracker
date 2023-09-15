@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements OnLoadCompleteLis
     private boolean IsPlaying = false;
     EditText[][] examples = new EditText[8][5];
     EditText BPM;
+    //
     //need to be made better
     TextView numScore;
 
